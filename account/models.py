@@ -34,6 +34,8 @@ class Role(models.Model):
 
     def __str__(self):
         return self.name
+    
+    
 class User(AbstractUser):
     role = models.ForeignKey(Role, null=True, blank=True, on_delete=models.CASCADE)
     mobile_number = models.CharField(max_length = 15, verbose_name = "Mobile No." )
@@ -46,6 +48,7 @@ class User(AbstractUser):
 
     def __obj__(self):
         return self.role
+    
 class BaseModel(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE,related_name="create")
     updated_by = models.ForeignKey(User, on_delete=models.CASCADE,related_name="update" ,null=True, blank=True)
@@ -55,12 +58,11 @@ class BaseModel(models.Model):
     class Meta:
         abstract = True
 
-
 class Project(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     project_name=models.CharField(max_length=100)
     
     
-    def __obj__(self):
+    def __str__(self):
         return self.project_name
    
