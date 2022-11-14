@@ -1,10 +1,8 @@
 from django.shortcuts import render,HttpResponse, redirect
 from .models import User
-from django.contrib.auth import authenticate, login,logout
-from django.contrib import messages
+from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 
-# Create your views here.
 
 @login_required
 def home(request):
@@ -13,10 +11,10 @@ def home(request):
 
 def registration(request):
     if request.method == 'POST':
-        username=request.POST['username']
-        email=request.POST['email']
-        mobile_number=request.POST['mobile_number']
-        password = request.POST['password']
+        username=request.POST.get('username')
+        email=request.POST.get('email')
+        mobile_number=request.POST.get('mobile_number')
+        password = request.POST.get('password')
         
         is_user_exists = User.objects.filter(email=email).exists()
  
@@ -28,34 +26,30 @@ def registration(request):
         user=User(username=username,email=email,mobile_number=mobile_number)
         user.set_password(password)
         user.save()
-        return render(request,'account/login.html')
+        return redirect('login')
 
     return render(request,'account/registration.html')
 
 
-def login(request):
-    
+def loginview(request):
     if request.method == 'POST':
-        user_email=request.POST['email']
-        user_password = request.POST['password']
-        try:
-            users= User.objects.filter(email=user_email).exists()
-            if not users:
-                message='Invalid Login Credentials!!'
-                return render(request, 'account/login.html',{'messages':message})
+        user_email=request.POST.get('email')
+        user_password = request.POST.get('password')
 
-            get_user=User.objects.get(email=user_email)
-            user_name=get_user.username
-            user= authenticate(username=user_name, password=user_password)
-            if user:
+        # users= User.objects.filter(email=user_email).exists()
+        # if not users:
+        #     message='Invalid Login Credentials!!'
+        #     return render(request, 'account/login.html',{'messages':message})
 
-                return render(request,'account/home.html')
-            else:
-                message='You entered invalid credential for Email.,password or you may not registered as a User!!'
-                return render(request,'account/login.html',{'messages':message})
-        except:
-            return render(request, 'account/login.html',{'messages':" please provide valid credentials "})
-
+        user= authenticate(username=user_email, password=user_password)
+        if user is not None:
+            login(request,user)
+            print(user)
+            return render(request,'account/base.html',{'user':user})
+        else:
+            message='You entered invalid credential for Email.,password or you may not registered as a User!!'
+            return render(request,'account/login.html',{'messages':message})
+        
     return render(request, 'account/login.html')
 
 def logoutview(request):
@@ -63,6 +57,19 @@ def logoutview(request):
     return redirect('login')
 
 
+def change_password(request):
+    if request.method == 'POST':
+        old_password=request.POST['old_password']
+        new_password = request.POST['new_password']
+        confirm_password=request.POST['confirm_password']
+        print(old_password,new_password,confirm_password)
+        user=User.objects.get(username=request.user)
+        if new_password == confirm_password :
+            user.set_password(new_password)
+            user.save()
+            
+            return render(request,'account/login.html',{'messages':'your password has been changed ,Please login '})
+        else:
+            return render(request,'account/change_password.html',{'messages':"new password and confirm password are not match"})
 
-
-
+    return render(request,'account/change_password.html')

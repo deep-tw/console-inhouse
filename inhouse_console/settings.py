@@ -151,3 +151,8 @@ LOGOUT_REDIRECT_URL = 'account/login'
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1090651221584-8vfk1au184h480q6f8j93qketkb0pof6.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
+
+LOGIN_URL='/account/login'
+
+
+AUTHENTICATION_BACKENDS = ['account.backends.EmailBackend'] 
