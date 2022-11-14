@@ -5,11 +5,10 @@ from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
-    path('',home,name='home'),
     path('login/',loginview,name='login'),
     path('logout/',logoutview,name='logout'),
     path('registration/',registration,name='registration'),
     path('change_password/',change_password,name='change_password'),
     path('social-auth/', include('social_django.urls', namespace='social')),
-
 ]
+

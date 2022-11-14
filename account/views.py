@@ -45,7 +45,7 @@ def loginview(request):
         if user is not None:
             login(request,user)
             print(user)
-            return render(request,'account/base.html',{'user':user})
+            return redirect('index')
         else:
             message='You entered invalid credential for Email.,password or you may not registered as a User!!'
             return render(request,'account/login.html',{'messages':message})
@@ -67,7 +67,7 @@ def change_password(request):
         if new_password == confirm_password :
             user.set_password(new_password)
             user.save()
-            
+
             return render(request,'account/login.html',{'messages':'your password has been changed ,Please login '})
         else:
             return render(request,'account/change_password.html',{'messages':"new password and confirm password are not match"})
