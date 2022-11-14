@@ -24,16 +24,15 @@
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Add Project</h3></div>
                                     <div class="card-body">
 
-    <form action="{% url 'index' %}" method="POST">
+    <form action="{% url 'update' project_data.id %}" method="POST">
      {% csrf_token %}
         <div class="form-group">
           <label for="Project Name">Project Name</label>
           <input value="{{ project_data.project_name }}" type="text" name="ProjectName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
         </div>
         <div class="form-group">
-          <label value="{{ project.project_description }}" >Description</label>
-          
-          <textarea name="Description" ></textarea>
+          <label for="exampleInputPassword1">Description</label>
+          <input value="{{ project_data.project_description }}" type="text" name="description">
         </div>
         <div class="form-group">
           <label>Project Assignee</label>
@@ -41,6 +40,7 @@
           <select class="form-control">
             <option value="{{user}}">{{user}}</option>  
         </select>
+      </div>
           <div class="form-group">
             <label for="Reporting Manager">Reporting Manager</label>
             <input type="text" value="{{ project_data.project_reporting_manager }}" name="ReportingManager" class="form-control" id="Reporting Manager" placeholder="Reporting Manager">
@@ -57,10 +57,10 @@
             <label  for="Closing Date">Closing Date</label>
             <input type="date" value="{{ project_data.project_closing_date }}" name="ClosingDate" class="form-control" id="Closing Date" placeholder="Closing Date">
           </div>
+         
           <div class="form-group">
             <label>Remark</label>
-
-            <textarea value="{{ project_data.project_remark }}" name="Remark" ></textarea>
+            <input value="{{ project_data.project_remark }}" type="text" name="remark">
           </div>
 
           <label for="Project Status">Project Status</label>

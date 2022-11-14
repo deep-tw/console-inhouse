@@ -55,6 +55,31 @@ def delete_data(request, id):
 
 
 def update_data(request,id):
-    project_data = Project.objects.get(id=id)
-    return render (request, 'projects/project_update.html', {'project_data':project_data})
+    user=request.user
+        
+    if request.method=="POST":
+        project_name=request.POST.get('ProjectName')
+        project_description=request.POST.get('description')
+        project_reporting_manager=request.POST.get('ReportingManager')
+        project_bde_manager=request.POST.get('BDEManager')
+        project_start_date=request.POST.get('StartDate')
+        project_closing_date =request.POST.get('ClosingDate')
+        project_remark=request.POST.get('remark')
+        project_status=request.POST.get('ProjectStatus')
+    
+
+        project_data = Project.objects.get(id=id)
+        project_data.project_name = project_name
+        project_data.project_description = project_description
+        project_data.project_reporting_manager = project_reporting_manager
+        project_data.project_bde_manager = project_bde_manager
+        project_data.project_start_date = project_start_date
+        project_data.project_closing_date = project_closing_date
+        project_data.project_remark = project_remark
+        project_data.project_status = project_status
+        project_data.save()
+        return HttpResponseRedirect('/')
+
+    project = Project.objects.get(id=id)
+    return render (request, 'projects/project_update.html', {'project_data':project})
 
