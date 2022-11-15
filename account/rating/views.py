@@ -1,9 +1,10 @@
 from django.shortcuts import render,HttpResponseRedirect
 from account.models import Rating , User
 
-def index(request):
-        ratings=Rating.objects.all()
-        return render(request,'dashboard/index.html',{'dev_rating':ratings})  
+# def index(request):
+#         ratings=Rating.objects.all()
+#         breakpoint()
+#         return render(request,'rating/retrieve_rating.html',{'dev_rating':ratings})  
 
 def add_rating(request):
         if request.method == 'POST':
@@ -16,14 +17,14 @@ def add_rating(request):
                                                  created_by=created_by,updated_by=updated_by)
                 
                 user_data.save()
-                return HttpResponseRedirect('/dashboard/')
+                return HttpResponseRedirect('/dashboard/retrieve_rating/')
         return render(request,'rating/add_rating.html')
         
 
-# def retrieve_rating(request):
-#         ratings=Rating.objects.all()
-#         # print(ratings)
-#         return render(request,'rating/retrieve_rating.html',{'dev_rating':ratings})   
+def retrieve_rating(request):
+        ratings=Rating.objects.all()
+        # print(ratings)
+        return render(request,'rating/retrieve_rating.html',{'dev_rating':ratings})   
 
 def update_rating(request,id):
         if request.method=="POST":
