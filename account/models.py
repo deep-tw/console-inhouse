@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinValueValidator, MaxValueValidator
-
+from inhouse_console import settings
 
 status_choices = (
 ('Working' , 'Working'),
@@ -44,14 +44,15 @@ class User(AbstractUser):
     certifications = models.FileField(upload_to = "certifications")
     status = models.CharField(choices = status_choices, default = 'Select Status', max_length = 30 )
     technologies = models.CharField(choices = technologies_known, default = 'Select Technology',  max_length = 35)
-    rating=models.IntegerField(default=0,validators=[MinValueValidator(0),MaxValueValidator(5)])
 
     def __obj__(self):
         return self.role
     
 class BaseModel(models.Model):
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE,related_name="create")
-    updated_by = models.ForeignKey(User, on_delete=models.CASCADE,related_name="update" ,null=True, blank=True)
+    created_by = models.CharField(max_length=100)
+    updated_by = models.CharField(max_length=100)
+    # created_by = models.ForeignKey(User,null=True, blank=True, on_delete=models.CASCADE)
+    # updated_by = models.ForeignKey(User,null=True, blank=True, on_delete=models.CASCADE)
     created_on=models.DateTimeField(auto_now_add=True)
     updated_on=models.DateTimeField(auto_now=True)   
     
@@ -65,4 +66,13 @@ class Project(BaseModel):
     
     def __str__(self):
         return self.project_name
-   
+
+class Rating(BaseModel):
+    developer_rating=models.IntegerField(default=0,validators=[MinValueValidator(0),MaxValueValidator(5)],verbose_name='developer rating')
+    developer_name=models.ForeignKey(User,on_delete=models.CASCADE,verbose_name="developer name",blank = True)
+    created_by = models.CharField(max_length=100)
+    updated_by = models.CharField(max_length=100)
+
+    def __str__(self):
+        return str(self.developer_name)
+    

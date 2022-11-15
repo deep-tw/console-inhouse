@@ -1,0 +1,19 @@
+<html>
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        <label for="developer_rating">Developer Rating:</label>
+        <input type="number" name="developer_rating" value={{dev_rating.developer_rating}}><br><br>
+
+        <label for="developer_name">Developer Name:</label>
+        <input type="text" name="developer_name" value={{dev_rating.developer_name}}><br><br>
+
+        <label for="created_by">Created By:</label>
+        <input type="text" name="created_by" value={{dev_rating.created_by}}><br><br>
+
+        <label for="updated_by">Updated By:</label>
+        <input type="text" name="updated_by" value={{dev_rating.updated_by}}><br><br>
+
+        <input type="submit" value="Submit">
+      </form>
+</html>

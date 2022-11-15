@@ -1,0 +1,22 @@
+<html>
+<body>
+        <table>
+                <tr>
+                <th>Developer Rating</th>
+                <th>Developer Name</th>
+                <th>Created By</th>
+                <th>Updated By</th>
+                </tr>
+                {% for rating in dev_rating %}
+                <tr>
+                <td>{{rating.developer_rating}}</td>
+                <td>{{rating.developer_name}}</td>
+                <td>{{rating.created_by}}</td>
+                <td>{{rating.updated_by}}</td>
+                <td><a href="{% url "update" id=rating.id %}">Edit</a></td> 
+                <td><a href="{% url "delete" id=rating.id %}">Delete</a></td>
+                </tr>
+                {% endfor %}
+        </table>    
+</body>
+</html>
