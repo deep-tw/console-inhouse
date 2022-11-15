@@ -83,3 +83,5 @@ def update_data(request,id):
     project = Project.objects.get(id=id)
     return render (request, 'projects/project_update.html', {'project_data':project})
 
+def log(request):
+    return render(request, 'dashboard/login.html')
