@@ -1,7 +1,20 @@
 from django.urls import path, include
-from .views import index
+from dashboard.admin.views import admindashboard
+from dashboard.manager.views import managerdashboard,alldevelopers
+from dashboard.developer.views import developerdashboard
 
 urlpatterns = [
-    path('index/', index, name='index'),
+
+    #----------------Admin --------------------------------
+    path('admindashboard/', admindashboard, name='admindashboard'),
+
+    #----------------Manager --------------------------------
+    path('managerdashboard/', managerdashboard, name='managerdashboard'),
+    path('alldevelopers/', alldevelopers, name='alldevelopers'),
+
+
+    #----------------Developer --------------------------------
+    path('developerdashboard/', developerdashboard, name='developerdashboard'),
+
 
 ]

@@ -33,15 +33,15 @@ class Role(models.Model):
     permission = models.TextField(max_length=150)  
 
     def __str__(self):
-        return self.name
+        return str(self.name)
     
     
 class User(AbstractUser):
     role = models.ForeignKey(Role, null=True, blank=True, on_delete=models.CASCADE)
     mobile_number = models.CharField(max_length = 15, verbose_name = "Mobile No." )
     designation = models.CharField(max_length = 45, verbose_name = "Designation")
-    profile_picture = models.ImageField(upload_to="profile_pic")
-    certifications = models.FileField(upload_to = "certifications")
+    profile_picture = models.ImageField(upload_to="profile_pic",blank=True,null=True)
+    certifications = models.FileField(upload_to = "certifications",blank=True,null=True)
     status = models.CharField(choices = status_choices, default = 'Select Status', max_length = 30 )
     technologies = models.CharField(choices = technologies_known, default = 'Select Technology',  max_length = 35)
     rating=models.IntegerField(default=0,validators=[MinValueValidator(0),MaxValueValidator(5)])
@@ -61,7 +61,6 @@ class BaseModel(models.Model):
 class Project(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     project_name=models.CharField(max_length=100)
-    
     
     def __str__(self):
         return self.project_name

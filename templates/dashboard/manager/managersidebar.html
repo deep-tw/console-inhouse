@@ -2,13 +2,13 @@
 <div id="layoutSidenav">
     <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-            <div class="sb-sidenav-menu">
+            <div class="sb-sidenav-menu"><br>
+                <a class="nav-link" href="{% url 'managerdashboard'%}" style="color: white">
+                    <div  class="fa fa-home" aria-hidden="true"><i class="fas fa-table"></i></div>
+                    Home
+                </a>
                 <div class="nav">
-                    <div class="sb-sidenav-menu-heading">Role</div>
-                    <a class="nav-link" href="#">
-                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        Manager
-                    </a>
+                    <div class="sb-sidenav-menu-heading">Role <p style="color:white ;">{{user.role}} </p></div>
                     <!-- <div class="sb-sidenav-menu-heading">Interface</div> -->
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>

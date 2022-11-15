@@ -1,0 +1,100 @@
+mycode.py
+
+from guesslang import Guess
+import numpy as np
+from os import system as sys
+import os.path
+from subprocess import STDOUT, PIPE,run
+import subprocess
+import os
+
+#to get the current working directory
+directory = os.getcwd()
+print(directory)
+
+examName = str(input("What is the name of the file?"))
+exam = open(examName,"r") 
+exam_lines = exam.readlines()
+
+#get extention of file name
+lname = examName.split(".")
+name=lname[0]
+print(lname[0])
+
+#convert a code in text 
+data=[]
+for line in exam_lines:
+    data.append(line)
+
+s = " ".join(data)
+code=s.replace(',','')
+
+print(code)
+
+
+# code to identfy the language in given txt file 
+def identify_code(code):
+    guess = Guess()
+    # Guess the language from code
+    language = guess.language_name(code) 
+    return language
+
+lang=identify_code(code)
+print(lang)
+
+#convert a text file to required language extention
+def conver_extention(name,exe,code):
+    with open(name+'.'+exe,"w") as fh:
+        fh.write("".join(code))
+    return True
+
+# compile the language code which identified by identify_code function 
+def compile_code(code,lang):
+    
+    if lang == 'C':
+        print('Execute C language ')
+        x=conver_extention(str(name),str(lang.lower()),code)
+        print(x)
+        file_name=(str(name)+'.'+str(lang.lower()))
+        print(file_name)
+        subprocess.call(['gcc',file_name])
+        out=subprocess.call("./a.out")
+        print('\n c program executed successfully')
+        
+    elif lang == 'Python':
+        print('Execute python language ') 
+        executed_code=exec(code)
+        breakpoint()
+        print(executed_code)
+        breakpoint()
+        return executed_code
+
+    elif lang == 'Java':
+        print('Execution Java start ') 
+        x=conver_extention(str(name),str(lang.lower()),code)
+        print(x)
+        file_name=(str(name)+'.'+str(lang.lower()))
+        def compile_java(javafile):
+            cmd = 'javac ' + javafile 
+            proc = subprocess.Popen(cmd, shell=True)
+            print('output :-',proc)
+        func=compile_java(file_name)
+        print('Execution Java end ') 
+        return func
+        
+    else:
+        print('Other language')
+  
+    
+output_of_code=compile_code(code,lang)
+print(output_of_code)
+print('after compile code')
+
+# Output save into a text file 
+def store_output(code,a):
+    with open("Output"+".txt", "w") as fh:
+        fh.write("".join(code))
+        fh.write("".join(a))
+
+store_output(code,'\n\nOutput of a give program is .....',)
+
