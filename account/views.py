@@ -74,6 +74,7 @@ def logoutview(request):
     logout(request)
     return redirect('login')
 
+
 def change_password(request):
     role= str(request.user.role)
     if request.method == 'POST':

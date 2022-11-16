@@ -48,7 +48,8 @@ class User(AbstractUser):
 
     def __obj__(self):
         return self.role
-    
+
+
 class BaseModel(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE,related_name="create")
     updated_by = models.ForeignKey(User, on_delete=models.CASCADE,related_name="update" ,null=True, blank=True)
@@ -64,6 +65,14 @@ class Project(BaseModel):
     
     def __str__(self):
         return self.project_name
-   
+  
+
+
+class ManagerModel(models.Model):
+    users = models.ForeignKey(User, on_delete = models.CASCADE,limit_choices_to={'role':'Developers'})
+    projects=models.ForeignKey(Project,on_delete=models.CASCADE)   
+
+      
+
 
 
