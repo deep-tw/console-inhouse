@@ -205,7 +205,13 @@ body {
 }	
 .signup-form form a:hover {
 	text-decoration: underline;
-}  
+} 
+#cars{
+      height: 37px;
+      width: 387px;
+      border: 1px solid rgb(214, 212, 212);
+      
+    } 
 </style>
 </head>
 <body>
@@ -227,8 +233,11 @@ body {
         </div>
 
 		<div class="form-group">
-            <input type="text" class="form-control" value="{{ user }}" name="password" placeholder="Project Assignee" required="required">
-            <option value="{{user}}">{{user}}</option> 
+      <select name="cars" id="cars">
+                 
+        <option value="{{ user }}">{{ user }}</option>
+        
+      </select>
         </div>
 
 		<div class="form-group">
@@ -255,7 +264,7 @@ body {
 
 <div class="form-group">
   <label for="Project Status">Project Status</label>
-                                            <select name="ProjectStatus" id="Project-Status">
+                                            <select name="ProjectStatus" id="cars">
                                                 <option  value="Not Started">Not Started</option>
                                                 <option value="In Progress">In Progress</option>
                                                 <option value="Closed">Closed</option>
