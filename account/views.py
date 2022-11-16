@@ -56,7 +56,7 @@ def loginview(request):
                 
             elif user_role == 'Manager':
                 print('manageruser')
-                   
+                
                 return redirect('managerdashboard')
 
             elif user_role == 'Developer':
