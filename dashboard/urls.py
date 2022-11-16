@@ -1,6 +1,6 @@
 from django.urls import path, include
 from dashboard.admin.views import admindashboard
-from dashboard.manager.views import managerdashboard,alldevelopers
+from dashboard.manager.views import managerdashboard,allprojects
 from dashboard.developer.views import developerdashboard
 
 urlpatterns = [
@@ -10,7 +10,7 @@ urlpatterns = [
 
     #----------------Manager --------------------------------
     path('managerdashboard/', managerdashboard, name='managerdashboard'),
-    path('alldevelopers/', alldevelopers, name='alldevelopers'),
+    path('allprojects/', allprojects, name='allprojects'),
 
 
     #----------------Developer --------------------------------

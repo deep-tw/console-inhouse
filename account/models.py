@@ -35,7 +35,7 @@ class Role(models.Model):
     def __str__(self):
         return str(self.name)
     
-    
+
 class User(AbstractUser):
     role = models.ForeignKey(Role, null=True, blank=True, on_delete=models.CASCADE)
     mobile_number = models.CharField(max_length = 15, verbose_name = "Mobile No." )
@@ -65,5 +65,5 @@ class Project(BaseModel):
     def __str__(self):
         return self.project_name
    
-   
-   
+
+

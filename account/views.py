@@ -53,7 +53,7 @@ def loginview(request):
             if user_role == 'Admin' :
                 print('adminuser')
                 return redirect('admindashboard')
-
+                
             elif user_role == 'Manager':
                 print('manageruser')
                    
@@ -74,8 +74,8 @@ def logoutview(request):
     logout(request)
     return redirect('login')
 
-
 def change_password(request):
+    role= str(request.user.role)
     if request.method == 'POST':
         old_password=request.POST.get('old_password')
         new_password = request.POST.get('new_password')
@@ -90,6 +90,4 @@ def change_password(request):
         else:
             return render(request,'account/change_password.html',{'messages':"new password and confirm password are not match"})
 
-    return render(request,'account/change_password.html')
-
-
+    return render(request,'account/change_password.html',locals())

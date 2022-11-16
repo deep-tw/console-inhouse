@@ -5,13 +5,20 @@ from account.models import User,Project
 @login_required 
 def managerdashboard(request):
     role= str(request.user.role)
-    users=User.objects.get(email=request.user.email)
+    user_id=request.user.id
+    status=request.user.status
+
+    users=User.objects.filter(role=request.user.role)
+    for x in users:
+        print(x.id,x.email,x.username,x.status)
     projects=Project.objects.all()
-    print(users,projects)
-    
-    return render (request,'dashboard/manager/managerhome.html',locals())
+    print(users,status,projects)
 
-def alldevelopers(request):
+    return render (request,'dashboard/manager/managerhome.html',{'role':role,'projects':projects})
 
-    return render (request,'dashboard/manager/alldevelopers.html')
+def allprojects(request):
+    projects=Project.objects.all()
+    role= str(request.user.role)
+
+    return render (request,'dashboard/manager/projects.html',{'role':role,'projects':projects})
 

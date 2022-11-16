@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 @login_required 
 def admindashboard(request):
-    return render (request, 'dashboard/admin/adminhome.html')
+    role= str(request.user.role)
+
+    return render (request, 'dashboard/admin/adminhome.html',locals())
 
 
