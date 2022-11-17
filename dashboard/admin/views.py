@@ -19,6 +19,16 @@ def admindashboard(request):
 
 
 def alldevelopers(request):
+    role= str(request.user.role)
+
     alldevelopers=User.objects.filter(role=3)
     print(alldevelopers)
     return render (request, 'dashboard/admin/alldevelopers.html',locals())
+
+
+def allmanagers(request):
+    role= str(request.user.role)
+
+    allmanagers=User.objects.filter(role=2)
+    print(allmanagers)
+    return render (request, 'dashboard/admin/allmanagers.html',locals())
