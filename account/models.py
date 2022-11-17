@@ -27,6 +27,10 @@ technologies_known = (
 
 )
 
+project_status = (('Not Started','Not Started'),
+                  ('In Progress','In Progress'),
+                  ('Closed', 'Closed'),
+                  ('Terminated','Terminated'))
 
 class Role(models.Model):  
     name = models.CharField(max_length=50)
@@ -49,6 +53,8 @@ class User(AbstractUser):
         return self.role
     
 class BaseModel(models.Model):
+    # created_by = models.ForeignKey(User, on_delete=models.CASCADE,related_name="create", null=True, blank=True)
+    # updated_by = models.ForeignKey(User, on_delete=models.CASCADE,related_name="update" ,null=True, blank=True)
     created_by = models.CharField(max_length=100)
     updated_by = models.CharField(max_length=100)
     # created_by = models.ForeignKey(User,null=True, blank=True, on_delete=models.CASCADE)
@@ -60,8 +66,16 @@ class BaseModel(models.Model):
         abstract = True
 
 class Project(BaseModel):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    project_name=models.CharField(max_length=100)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    project_name = models.CharField(max_length=100, verbose_name='Project Name')
+    project_description = models.TextField(verbose_name='Description', null=True, blank=True)
+    project_assignee = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Assignee')
+    project_reporting_manager = models.CharField( max_length=100, verbose_name='Reporting Manager')
+    project_bde_manager = models.CharField(max_length=200, verbose_name='BDE Manager')
+    project_start_date = models.DateField(verbose_name="Start Date")
+    project_closing_date = models.DateField(verbose_name='Closing Date')
+    project_remark = models.TextField(verbose_name='Remark', null=True, blank=True )
+    project_status = models.CharField(choices=project_status, max_length=50, default='Not Started' ,verbose_name='Status')
     
     
     def __str__(self):
