@@ -1,12 +1,29 @@
 from django.shortcuts import render, HttpResponseRedirect,redirect
 from account.models import Project
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+from django.utils import timezone
+import logging
+
+# Create your views here.
+logger = logging.getLogger(__name__)
+@login_required 
 def index(request):
     projects = Project.objects.all()
+    logger.error("Test!!")
+    t = timezone.now()
+    logging.debug("hello", t)
     return render (request, 'dashboard/index.html',  {"project_data": projects})
 
-
+# def log(request):
+#     return render(request, 'dashboard/login.html')
+#     logger.error("Test!!")
+#     t = timezone.now()
+#     logging.debug("hello", t)
+    
+#     return render (request, 'dashboard/index.html')
 
 def project(request):
 
@@ -78,10 +95,10 @@ def update_data(request,id):
         project_data.project_remark = project_remark
         project_data.project_status = project_status
         project_data.save()
-        return HttpResponseRedirect('/')
+        return redirect('/')
 
     project = Project.objects.get(id=id)
     return render (request, 'projects/project_update.html', {'project_data':project})
 
-def log(request):
-    return render(request, 'dashboard/login.html')
+
+    

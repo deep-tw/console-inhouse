@@ -107,7 +107,15 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
   font-weight: 500;
   line-height: 1.2;
 }
+nav ul li{
 
+  padding : 0 10px 0 10px;
+  
+  }
+.nav-item {
+  margin-right: 20px;
+}
+   
 h1, .h1 {
   font-size: calc(1.375rem + 1.5vw);
 }

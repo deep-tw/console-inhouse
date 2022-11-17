@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+# from pymongo import MongoClient
+# import dns
+import urllib
+import sys
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,6 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dashboard',
     'account',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.google',
 ]
 
 AUTH_USER_MODEL = 'account.User'
@@ -52,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'inhouse_console.urls'
@@ -64,12 +75,14 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR,"templates")],
         'APP_DIRS': True,
+    
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
             ],
         },
     },
@@ -87,6 +100,25 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+# user = urllib.parse.quote_plus('mridultw')
+# passwd = urllib.parse.quote_plus('Python@123#')
+
+# DATABASES = {
+#         'default': {
+#             'ENGINE': 'djongo',
+#             'NAME': 'admindb',
+#             'ENFORCE_SCHEMA': False,
+#             'CLIENT': {
+#                 'host':f'mongodb+srv://{user}:{passwd}@cluster0.wraq4uw.mongodb.net/test'
+#             }
+#         }
+# }
+            
+
+
+# client = "mongodb+srv://mridultw:Python@123#@cluster0.wraq4uw.mongodb.net/?retryWrites=true&w=major
 
 
 # Password validation
@@ -135,3 +167,59 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
+LOGIN_URL = 'account/login'
+LOGIN_REDIRECT_URL = 'account/home'
+LOGOUT_URL = 'account/logout'
+LOGOUT_REDIRECT_URL = 'account/login'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1090651221584-8vfk1au184h480q6f8j93qketkb0pof6.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+
+LOGIN_URL='/account/login'
+
+
+AUTHENTICATION_BACKENDS = ['account.backends.EmailBackend'] 
+
+
+# DataFlair #Logging Information
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(BASE_DIR,'logs/inhouse.log'),
+            'formatter': 'verbose',
+            'when': 'midnight',
+            'interval': 1,
+        },
+    },
+    'root': {
+        'handlers': ['file'],
+        'level': 'DEBUG',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}

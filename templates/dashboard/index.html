@@ -1,3 +1,5 @@
+{% extends 'dashboard/base.html' %}
+{% block bodycontent %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -101,7 +103,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Tables
                             </a>
-                            <a class="nav-link" href="{% url 'project' %}">
+                            <a class="nav-link" href="{% url 'project_create' %}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Projects
                             </a>
@@ -216,8 +218,8 @@
                                             <td>{{ project.project_closing_date }}</td>
                                             <td>{{ project.project_remark }}</td>
                                             <td>{{ project.project_status }}</td>
-                                            <td> <a href="{% url 'update' project.id %}"><button type="submit" class="btn btn-primary">Edit</button></td></a>
-                                            <td><a href="{% url 'delete' project.id %}" > <button type="submit" class="btn btn-danger">Delete</button></a></td>
+                                            <td> <a href="{% url 'update_project' project.id %}"><button type="submit" class="btn btn-primary">Edit</button></td></a>
+                                            <td><a href="{% url 'delete_project' project.id %}" > <button type="submit" class="btn btn-danger">Delete</button></a></td>
                                           </tr>
                                           {% endfor %}
                                     
@@ -251,3 +253,50 @@
         <script src="{% static 'js/datatables-simple-demo.js' %}"></script>
     </body>
 </html>
+
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        DataTable Example
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Developer Rating</th>
+                    <th>Developer Name</th>
+                    <th>Create By</th>
+                    <th>Updated By</th>
+                    <th>Action</th>
+                    
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Office</th>
+                    <th>Age</th>
+                    <th>Start date</th>
+                    <th>Salary</th>
+                </tr>
+            </tfoot>
+            {% for rating in dev_rating %}
+                <tr>
+                        <td>{{rating.developer_rating}}</td>
+                        <td>{{rating.developer_name}}</td>
+                        <td>{{rating.created_by}}</td>
+                        <td>{{rating.updated_by}}</td>
+                        <td><a href="{% url "update" id=rating.id %}">Edit</a></td> 
+                        <td><a href="{% url "delete" id=rating.id %}">Delete</a></td>
+                </tr>
+                {% endfor %}
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+</div> -->
+
+{% endblock %} 
