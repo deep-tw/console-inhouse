@@ -23,7 +23,6 @@ def index(request):
 def project(request):
     role= str(request.user.role)
     developers=User.objects.filter(role=3)
-  
     try:
         user=request.user
         
@@ -38,13 +37,16 @@ def project(request):
             project_status=request.POST.get('ProjectStatus')
             project_assignee=request.POST.get('cars')
             
+            users=''
             for x in developers:
-                print(x.email,x.username,'###')
-
+                if x.username == project_assignee:
+                    users=x
+            print(users,'@@@')
+            
             projects = Project(
                 project_name = project_name,
                 project_description = project_description, 
-                project_assignee = project_assignee,
+                project_assignee = users,
                 project_reporting_manager = project_reporting_manager,
                 project_bde_manager = project_bde_manager,
                 project_start_date = project_start_date,
