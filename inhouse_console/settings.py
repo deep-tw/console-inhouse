@@ -240,7 +240,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.handlers.TimedRotatingFileHandler',
-            'filename': os.path.join(BASE_DIR,'logs/inhouse.log'),
+            'filename': os.path.join(BASE_DIR,'inhouse.log'),
             'formatter': 'verbose',
             'when': 'midnight',
             'interval': 1,

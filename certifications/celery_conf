@@ -1,0 +1,87 @@
+
+#celery.py in project level of settings.py 
+
+import os
+from celery import Celery
+
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project1.settings')
+
+app = Celery('project1')
+
+app.config_from_object('django.conf:settings', namespace='CELERY')
+app.autodiscover_tasks()
+
+@app.task(bind=True)
+def debug_task(self):
+   print(f'Request:{self.request!r}')
+
+
+
+
+
+# celery configuration to connect with redis
+
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/kolkata'
+
+CELERY_STORE_ERRORS_EVEN_IF_IGNORED = True
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://127.0.0.1:6379/0")
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
+
+
+
+tesk.py:
+
+from __future__ import absolute_import, unicode_literals
+
+from celery import shared_task
+from django.http import HttpResponse
+from django.core.mail import send_mail
+from project1 import settings
+@shared_task
+def mail_send_func(request,subject,message,to_email):
+    print(subject)
+    print(message)
+    print(to_email)
+    subject=subject
+    message=message
+    to_email=to_email
+    send_mail(subject,message,settings.EMAIL_HOST_USER,[to_email],fail_silently=False)
+    
+    
+__init__.py on settings,py level 
+
+
+
+
+from __future__ import absolute_import, unicode_literals
+from .celery import app as celery_app
+import os
+
+__all__ = ['celery_app']
+
+
+
+    
+    
+    
+    
+    
+

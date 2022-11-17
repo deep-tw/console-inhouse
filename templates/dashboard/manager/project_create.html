@@ -1,8 +1,6 @@
 {% extends "dashboard/base.html" %}
-
-
-{% block bodycontent %}
 {% load static %}
+{% block bodycontent %}
 
 <style>body {
 	color: #fff;
@@ -98,6 +96,8 @@
       border: 1px solid rgb(214, 212, 212);
       
     } </style>
+
+
 <div class="signup-form">
     <form action="{% url 'project_create' %}" method="post">
       {% csrf_token %}
@@ -116,11 +116,13 @@
         </div>
 
 		<div class="form-group">
+		
       <select name="cars" id="cars">
-        <label value="{{user}}" >Project Assignee</label>        
+        <label >Project Assignee</label>        
         <!-- <option value="{{ user }}">{{ user }}</option> -->
-         <option value="{{user}}">{{user}}</option> 
-        
+		{% for u in developers %}
+         <option value="{{u}}">{{u}}</option> 
+        {% endfor %}
       </select>
         </div>
 
@@ -164,6 +166,6 @@
         <button type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
     </div>
 </form>
-       
+</div> 
  {% endblock %}
  

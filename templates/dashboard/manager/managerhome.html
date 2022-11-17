@@ -1,0 +1,136 @@
+{% extends "dashboard/base.html" %}
+
+{% block bodycontent %}
+<center><h3>Manager Home</h3></center>
+
+<div class="row">
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-primary text-white mb-4">
+            <div class="card-body">Developers</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <h3>{{developers}}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-warning text-white mb-4">
+            <div class="card-body">Projects</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" href="#">View Details</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-success text-white mb-4">
+            <div class="card-body">Success Card</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" href="#">View Details</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-danger text-white mb-4">
+            <div class="card-body">Danger Card</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" href="#">View Details</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Project Table
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th scope="col">Project Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Project Assignee</th>
+                    <th scope="col">Reporting Manager</th>
+                    <th scope="col">BDE Manager</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">Closing Date</th>
+                    <th scope="col">Remark</th>
+                    <th scope="col">Project Status</th>
+                    <th scope="col" colspan="2" style="text-align:center;">Actions</th>
+                  </tr>
+            </thead>
+            
+            <tbody>
+                
+                    {% for project in project_data %}
+                  <tr>
+                    
+                    <td>{{ project.project_name }}</td>
+                    <td>{{ project.project_description }}</td>
+                    <td>{{ project.project_assignee }}</td>
+                    <td>{{ project.project_reporting_manager }}</td>
+                    <td>{{ project.project_bde_manager }}</td>
+                    <td>{{ project.project_start_date }}</td>
+                    <td>{{ project.project_closing_date }}</td>
+                    <td>{{ project.project_remark }}</td>
+                    <td>{{ project.project_status }}</td>
+                    <td> <a href="{% url 'update_project' project.id %}"><button type="submit" class="btn btn-primary">Edit</button></td></a>
+                    <td><a href="{% url 'delete_project' project.id %}" > <button type="submit" class="btn btn-danger">Delete</button></a></td>
+                  </tr>
+                  {% endfor %}
+            
+                  
+        </table>
+    </div>
+    <div>
+        <table>
+            <div class="card mb-4">
+                <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                DataTable Example
+                </div>
+                <div class="card-body">
+                <table id="datatablesSimple">
+                <thead>
+                <tr>
+                <th>Developer Rating</th>
+                <th>Developer Name</th>
+                <th>Create By</th>
+                <th>Updated By</th>
+                <th>Action</th>
+                
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Start date</th>
+                <th>Salary</th>
+                </tr>
+                </tfoot>
+                {% for rating in dev_rating %}
+                <tr>
+                <td>{{rating.developer_rating}}</td>
+                <td>{{rating.developer_name}}</td>
+                <td>{{rating.created_by}}</td>
+                <td>{{rating.updated_by}}</td>
+                <td><a href="{% url "update" id=rating.id %}">Edit</a></td> 
+                <td><a href="{% url "delete" id=rating.id %}">Delete</a></td>
+                </tr>
+                {% endfor %}
+                
+                </tbody>
+        </table>
+    </div>
+
+    
+
+
+
+{% endblock %}

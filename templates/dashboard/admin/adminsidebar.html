@@ -4,7 +4,14 @@
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                 <div class="nav">
-                    <div class="sb-sidenav-menu-heading">Role</div>
+
+                    <br>
+                    <a class="nav-link" href="{% url 'admindashboard'%}" style="color: white">
+                        <div  class="fa fa-home" aria-hidden="true"><i class="fas fa-table"></i></div>
+                        Home
+                    </a>
+                    <div class="sb-sidenav-menu-heading">Role <p style="color:white ;"> {{user.role}}</p></div>
+                    
                     <a class="nav-link" href="#">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Manager
@@ -21,11 +28,6 @@
                             <!-- <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a> -->
                         </nav>
                     </div>
-                    <!-- <div class="sb-sidenav-menu-heading">Addons</div> -->
-                    <a class="nav-link" href="#">
-                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                        Ratings
-                    </a>
                     <a class="nav-link" href="#">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         Projects
