@@ -5,7 +5,6 @@
         <table id="datatablesSimple">
             <thead>
                 <tr><th>Username</th>
-                    <th>Email Id</th>
                     <th>Role</th>
                     <th>mobile_number</th>
                     <th>designation</th>
@@ -15,10 +14,10 @@
                     <th>Delete</th>
                 </tr>
             </thead>
+        
             <tbody>
-                {% for users in alldevelopers %}
+                {% for users in allmanagers %}
                 <tr><td>{{users.username}}</td>
-                    <td>{{users.email}}</td>
                     <td>{{users.role}}</td>
                     <td>{{users.mobile_number}}</td>
                     <td>{{users.designation}}</td>
@@ -31,5 +30,5 @@
             </tbody>
         </table>
 
-
 {% endblock %}
+

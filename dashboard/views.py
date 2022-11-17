@@ -40,6 +40,7 @@ def project(request):
             users=''
             for x in developers:
                 if x.username == project_assignee:
+                    pass
                     users=x
             print(users,'@@@')
             

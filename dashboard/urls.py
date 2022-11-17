@@ -1,8 +1,8 @@
 from django.urls import path
 from .import views
 from django.urls import path, include
-from dashboard.admin.views import admindashboard
-from dashboard.manager.views import managerdashboard,allprojects
+from dashboard.admin.views import admindashboard,alldevelopers,allmanagers
+from dashboard.manager.views import managerdashboard,allprojects,alldevelopers
 from dashboard.developer.views import developerdashboard
 from .views import index
 from account.rating.views import add_rating,update_rating,delete_rating,retrieve_rating
@@ -12,10 +12,15 @@ urlpatterns = [
 
     #----------------Admin --------------------------------
     path('admindashboard/', admindashboard, name='admindashboard'),
+    path('alldevelopers/', alldevelopers, name='alldevelopers'),
+    path('allmanagers/', allmanagers, name='allmanagers'),
+
 
     #----------------Manager --------------------------------
     path('managerdashboard/', managerdashboard, name='managerdashboard'),
     path('allprojects/', allprojects, name='allprojects'),
+    path('alldevelopers/', alldevelopers, name='alldevelopers'),
+
 
 
     #----------------Developer --------------------------------

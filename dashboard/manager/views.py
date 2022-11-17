@@ -24,4 +24,11 @@ def allprojects(request):
     
     return render (request,'dashboard/manager/projects.html',locals())
 
+def alldevelopers(request):
+    role= str(request.user.role)
+
+    alldevelopers=User.objects.filter(role=3)
+    print(alldevelopers)
+    return render (request, 'dashboard/manager/alldevelopers.html',locals())    
+
 
