@@ -86,7 +86,7 @@ class Project(BaseModel):
 class ManagerModel(models.Model):
     users = models.ForeignKey(User, on_delete = models.CASCADE,blank=True, null=True)
     projects=models.ForeignKey(Project,on_delete=models.CASCADE)   
-
+    
 
 class Rating(BaseModel):
     developer_rating=models.IntegerField(default=0,validators=[MinValueValidator(0),MaxValueValidator(5)],verbose_name='developer rating')

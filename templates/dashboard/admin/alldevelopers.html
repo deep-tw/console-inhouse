@@ -1,0 +1,39 @@
+{% extends "dashboard/base.html" %}
+
+
+{% block bodycontent %}
+<h3>All Developers</h3>
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Role</th>
+                    <th>mobile_number</th>
+                    <th>designation</th>
+                    <th>profile_picture</th>
+                    <th> certifications</th>
+                    <th>Status</th>
+                    <th>technologies</th>
+                    <th>Rating</th>
+                </tr>
+            </thead>
+        
+            <tbody>
+                {% for users in all_users %}
+                <tr>
+                    <td>{{users.role}}</td>
+                    <td>{{users.mobile_number}}</td>
+                    <td>{{users.designation}}</td>
+                    <td>{{users.profile_picture}}</td>
+                    <td>{{users.certifications}}</td>
+                    <td>{{users.status}}</td>
+                    <td>{{users.technologies}}</td>
+                    <td>{{users.rating}}</td>
+                </tr>
+                {% endfor %}
+
+               
+            </tbody>
+        </table>
+
+
+{% endblock %}

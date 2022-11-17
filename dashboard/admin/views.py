@@ -9,12 +9,16 @@ def admindashboard(request):
     print(str(request.user.role.id))
     developers=User.objects.filter(role=3).count()
     managers=User.objects.filter(role=2).count()
-
     print(developers)
     print(managers)
+
     all_users = User.objects.all()
 
 
     return render (request, 'dashboard/admin/adminhome.html',locals())
 
 
+def alldevelopers(request):
+    alldevelopers=User.objects.filter(role=3)
+    print(alldevelopers)
+    return render (request, 'dashboard/admin/alldevelopers.html',locals())
