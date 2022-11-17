@@ -89,26 +89,27 @@ WSGI_APPLICATION = 'inhouse_console.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-
-
-user = urllib.parse.quote_plus('mridultw')
-passwd = urllib.parse.quote_plus('Python@123#')
-
 DATABASES = {
-        'default': {
-            'ENGINE': 'djongo',
-            'NAME': 'admindb',
-            'ENFORCE_SCHEMA': False,
-            'CLIENT': {
-                'host':f'mongodb+srv://{user}:{passwd}@cluster0.wraq4uw.mongodb.net/test'
-            }
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+
+
+# user = urllib.parse.quote_plus('mridultw')
+# passwd = urllib.parse.quote_plus('Python@123#')
+
+# DATABASES = {
+#         'default': {
+#             'ENGINE': 'djongo',
+#             'NAME': 'admindb',
+#             'ENFORCE_SCHEMA': False,
+#             'CLIENT': {
+#                 'host':f'mongodb+srv://{user}:{passwd}@cluster0.wraq4uw.mongodb.net/test'
+#             }
+#         }
+# }
             
 
 
@@ -182,12 +183,47 @@ AUTHENTICATION_BACKENDS = ['account.backends.EmailBackend']
 
 
 # DataFlair #Logging Information
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'verbose': {
+#             'format': '{levelname} {asctime} {module} {process:d} {tread:hd} {message}',
+#             'style': '{',
+#         },
+#         'simple': {
+#             'format': '{levelname} {message}',
+#             'style': '{',
+#         },
+#     },
+#     'handlers': {
+#         'file': {
+#             'level': 'DEBUG',
+#             'class': 'logging.handlers.TimedRotatingFileHandler',
+#             'filename': ('logs/inhouse.log'),
+#             'formatter': 'verbose',
+#             'when': 'midnight',
+#             'interval': 1,
+#         },
+#     },
+#     'root': {
+#         'handlers': ['file'],
+#         'level': 'DEBUG',
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['file'],
+#             'level': 'DEBUG',
+#             'propagate': True,
+#         },
+#     },
+# }
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': '{levelname} {asctime} {module} {process:d} {tread:hd} {message}',
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
             'style': '{',
         },
         'simple': {
@@ -199,8 +235,8 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.handlers.TimedRotatingFileHandler',
-            'filename': ('logs/inhouse.log'),
-            # 'formatter': 'verbose',
+            'filename': os.path.join(BASE_DIR,'logs/inhouse.log'),
+            'formatter': 'verbose',
             'when': 'midnight',
             'interval': 1,
         },
@@ -217,7 +253,6 @@ LOGGING = {
         },
     },
 }
-
 
 
 
