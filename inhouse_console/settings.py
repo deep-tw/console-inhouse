@@ -12,9 +12,11 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
-from pymongo import MongoClient
+# from pymongo import MongoClient
 # import dns
 import urllib
+import sys
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,7 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dashboard',
     'account',
-    'social_django',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.google',
 ]
 
 AUTH_USER_MODEL = 'account.User'
@@ -89,26 +94,27 @@ WSGI_APPLICATION = 'inhouse_console.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-
-
-user = urllib.parse.quote_plus('mridultw')
-passwd = urllib.parse.quote_plus('Python@123#')
-
 DATABASES = {
-        'default': {
-            'ENGINE': 'djongo',
-            'NAME': 'admindb',
-            'ENFORCE_SCHEMA': False,
-            'CLIENT': {
-                'host':f'mongodb+srv://{user}:{passwd}@cluster0.wraq4uw.mongodb.net/test'
-            }
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+
+
+# user = urllib.parse.quote_plus('mridultw')
+# passwd = urllib.parse.quote_plus('Python@123#')
+
+# DATABASES = {
+#         'default': {
+#             'ENGINE': 'djongo',
+#             'NAME': 'admindb',
+#             'ENFORCE_SCHEMA': False,
+#             'CLIENT': {
+#                 'host':f'mongodb+srv://{user}:{passwd}@cluster0.wraq4uw.mongodb.net/test'
+#             }
+#         }
+# }
             
 
 
@@ -187,7 +193,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': '{levelname} {asctime} {module} {process:d} {tread:hd} {message}',
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
             'style': '{',
         },
         'simple': {
@@ -199,8 +205,8 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.handlers.TimedRotatingFileHandler',
-            'filename': ('logs/inhouse.log'),
-            # 'formatter': 'verbose',
+            'filename': os.path.join(BASE_DIR,'logs/inhouse.log'),
+            'formatter': 'verbose',
             'when': 'midnight',
             'interval': 1,
         },
@@ -217,10 +223,3 @@ LOGGING = {
         },
     },
 }
-
-
-
-
-
-
-
