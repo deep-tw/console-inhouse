@@ -10,5 +10,6 @@ urlpatterns = [
     path('registration/',registration,name='registration'),
     path('change_password/',change_password,name='change_password'),
     path('social-auth/', include('social_django.urls', namespace='social')),
+   
 ]
 

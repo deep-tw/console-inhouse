@@ -1,0 +1,11 @@
+<html>
+    <p>Are You Sure,You want to delete ?</p>
+    <form action="" method="DELETE">
+        {% csrf_token %}
+    <td><a href="{% url "add" %}" value="Cancel">Cancel</a></td>
+    <td><a href="{% url "delete" id=dev_rating.id %}" value="Delete">Delete</a></td>
+   
+        
+   
+    </form>
+</html>

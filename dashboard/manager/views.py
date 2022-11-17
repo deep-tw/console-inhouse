@@ -21,6 +21,7 @@ def managerdashboard(request):
 def allprojects(request):
     projects=Project.objects.all()
     role= str(request.user.role)
+    
+    return render (request,'dashboard/manager/projects.html',locals())
 
-    return render (request,'dashboard/manager/projects.html',{'role':role,'projects':projects})
 
