@@ -43,7 +43,7 @@ class Role(models.Model):
 class User(AbstractUser):
     role = models.ForeignKey(Role, null=True, blank=True, on_delete=models.CASCADE)
     mobile_number = models.CharField(max_length = 15, verbose_name = "Mobile No." )
-    designation = models.CharField(max_length = 45, verbose_name = "Designation")
+    designation = models.CharField(max_length = 255, verbose_name = "Designation")
     profile_picture = models.ImageField(upload_to="profile_pic",blank=True,null=True)
     certifications = models.FileField(upload_to = "certifications",blank=True,null=True)
     status = models.CharField(choices = status_choices, default = 'Select Status', max_length = 30 )
@@ -71,7 +71,7 @@ class Project(BaseModel):
     # user = models.ForeignKey(User, on_delete=models.CASCADE)
     project_name = models.CharField(max_length=100, verbose_name='Project Name')
     project_description = models.TextField(verbose_name='Description', null=True, blank=True)
-    project_assignee = models.ForeignKey(User, on_delete=models.CASCADE, related_name='assignee')
+    project_assignee = models.ForeignKey(User, on_delete=models.SET_NULL,null=True, related_name='assignee')
     project_reporting_manager = models.CharField( max_length=100, verbose_name='Reporting Manager')
     project_bde_manager = models.CharField(max_length=200, verbose_name='BDE Manager')
     project_start_date = models.DateField(verbose_name="Start Date")

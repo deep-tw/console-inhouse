@@ -104,6 +104,3 @@ def update_data(request,id):
 
     project = Project.objects.get(id=id)
     return render (request, 'dashboard/manager/project_update.html', {'role':role,'project_data':project})
-
-
-    

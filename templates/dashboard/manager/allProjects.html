@@ -1,3 +1,4 @@
+
 {% extends "dashboard/base.html" %}
 
 {% block bodycontent %}
@@ -17,7 +18,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for pro in projects %}
+                    {% for pro in manager %}
                     <tr><td>{{pro.project_name}}</td>
                         <td>{{pro.project_description}}</td>
                         <td>{{pro.project_assignee}}</td>
