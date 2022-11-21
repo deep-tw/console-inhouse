@@ -15,7 +15,7 @@ def managerdashboard(request):
     users=User.objects.filter(role=request.user.role)
     # for x in users:
     #     print(x.id,x.email,x.username,x.status)
-    projects=Project.objects.all()
+    projects=Project.objects.all().count()
     # print(users,status,projects)
     return render (request,'dashboard/manager/managerhome.html',{'developers':developers,'role':role,'projects':projects})
 
@@ -23,17 +23,16 @@ def managerdashboard(request):
 def allprojects(request):
     projects=Project.objects.all()
     role= str(request.user.role)
-    
-    return render (request,'dashboard/manager/projects.html',locals())
+    return render (request,'dashboard/manager/allProjects.html',locals())
 
 # List of all Developers
-def all_developers(request):
+def alldevelopers(request):
     role= str(request.user.role)
     print(role)
     alldevelopers=User.objects.filter(role=3)
 
     print(alldevelopers)
-    return render (request, 'dashboard/manager/alldevelopers.html',{'alldevelopers':alldevelopers})  
+    return render (request, 'dashboard/manager/alldevelopers.html',locals())  
 
 # update Developer
 def update_developer(request,id):
