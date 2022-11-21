@@ -48,7 +48,9 @@ class User(AbstractUser):
     certifications = models.FileField(upload_to = "certifications")
     status = models.CharField(choices = status_choices, default = 'Select Status', max_length = 30 )
     technologies = models.CharField(choices = technologies_known, default = 'Select Technology',  max_length = 35)
-
+    # class Meta:
+    #     verbose_name = 'account'
+    #     verbose_name_plural = 'accounts'
     def __obj__(self):
         return self.role
     

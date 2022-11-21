@@ -43,15 +43,51 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'dashboard',
     'account',
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.google',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    
 ]
 
-AUTH_USER_MODEL = 'account.User'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+]
+
+SOCIALACCOUNT_PROVIDERS = {
+    
+    'google': {
+        'APP': {
+        'client_id':'225822954063-k49066dctnhq6gqpjk99mtnbgjheboe2.apps.googleusercontent.com',
+        'secret':'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',
+        'key':''
+       
+      },
+    "SCOPE": [
+            "profile",
+            "email",
+        ],
+    }
+}
+
+
+
+SITE_ID = 2
+
+SOCIALACCOUNT_LOGIN_ON_GET=True
+LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_REDIRECT_URL = '/'
+
+
+AUTH_USER_MODEL = 'aditya.User'
+
+
 
 
 MIDDLEWARE = [
@@ -167,21 +203,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-AUTHENTICATION_BACKENDS = [
-    'social_core.backends.google.GoogleOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-]
-LOGIN_URL = 'account/login'
-LOGIN_REDIRECT_URL = 'account/home'
-LOGOUT_URL = 'account/logout'
-LOGOUT_REDIRECT_URL = 'account/login'
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1090651221584-8vfk1au184h480q6f8j93qketkb0pof6.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
-
-
-LOGIN_URL='/account/login'
 
 
 AUTHENTICATION_BACKENDS = ['account.backends.EmailBackend'] 
