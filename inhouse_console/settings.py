@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
-# from pymongo import MongoClient
+from pymongo import MongoClient
 # import dns
 import urllib
 import sys
@@ -83,7 +83,11 @@ SOCIALACCOUNT_LOGIN_ON_GET=True
 LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_REDIRECT_URL = '/'
-
+# ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_UNIQUE_EMAIL = True
+# ACCOUNT_AUTHENTICATION_METHOD = "email"
+# ACCOUNT_USERNAME_REQUIRED = False
+# ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 
 AUTH_USER_MODEL = 'aditya.User'
 
@@ -130,27 +134,27 @@ WSGI_APPLICATION = 'inhouse_console.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-
-# user = urllib.parse.quote_plus('mridultw')
-# passwd = urllib.parse.quote_plus('Python@123#')
-
 # DATABASES = {
-#         'default': {
-#             'ENGINE': 'djongo',
-#             'NAME': 'admindb',
-#             'ENFORCE_SCHEMA': False,
-#             'CLIENT': {
-#                 'host':f'mongodb+srv://{user}:{passwd}@cluster0.wraq4uw.mongodb.net/test'
-#             }
-#         }
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
 # }
+
+
+user = urllib.parse.quote_plus('mridultw')
+passwd = urllib.parse.quote_plus('Python@123#')
+
+DATABASES = {
+        'default': {
+            'ENGINE': 'djongo',
+            'NAME': 'admindb',
+            'ENFORCE_SCHEMA': False,
+            'CLIENT': {
+                'host':f'mongodb+srv://{user}:{passwd}@cluster0.wraq4uw.mongodb.net/test'
+            }
+        }
+}
             
 
 

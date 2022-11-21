@@ -50,9 +50,8 @@ background: linear-gradient(to right, rgb(247, 245, 248), rgb(248, 248, 250))
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
           <div class="card bg-dark text-white" style="border-radius: 1rem;">
             <div class="card-body p-5 text-center">
-                <form  action="" method="post">
-
-					{% csrf_token %}
+                <form  method="post">
+					    {% csrf_token %}
               <div class="mb-md-5 mt-md-4 pb-5">
   
                     {% if messages %}
@@ -73,12 +72,13 @@ background: linear-gradient(to right, rgb(247, 245, 248), rgb(248, 248, 250))
   
                 <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
                 <br><br>
-                <a  href="{% provider_login_url 'google'%}?next=/">
-                  <i class="fa fa-google fa-2x"></i></a>
+                
                <!-- <a href="#"></a> <i class="fa fa-twitter fa-2x" id="bd"></i></a>
                 <i class="fa fa-linkedin-square fa-2x" id="bd1"></i> -->
                   
                 </form>
+                <a  href="{% provider_login_url 'google'%}?next=/">
+                  <i class="fa fa-google fa-2x"></i></a>
                 <br><br>
                 <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
 

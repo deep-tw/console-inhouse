@@ -41,6 +41,7 @@ class Role(models.Model):
     
     
 class User(AbstractUser):
+    id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     role = models.ForeignKey(Role, null=True, blank=True, on_delete=models.CASCADE)
     mobile_number = models.CharField(max_length = 15, verbose_name = "Mobile No." )
     designation = models.CharField(max_length = 45, verbose_name = "Designation")
