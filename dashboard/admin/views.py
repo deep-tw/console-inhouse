@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from account.models import User
+from django.db.models import Count
 
 # Create your views here.
 @login_required 

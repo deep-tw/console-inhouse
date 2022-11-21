@@ -91,3 +91,4 @@ def change_password(request):
             return render(request,'account/change_password.html',{'messages':"new password and confirm password are not match"})
 
     return render(request,'account/change_password.html',locals())
+

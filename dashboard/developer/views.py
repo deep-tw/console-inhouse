@@ -9,4 +9,3 @@ def developerdashboard(request):
     return render (request,'dashboard/developer/developerhome.html',locals())
 # Create your views here.
 
-

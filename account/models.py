@@ -66,11 +66,12 @@ class BaseModel(models.Model):
     class Meta:
         abstract = True
 
+
 class Project(BaseModel):
     # user = models.ForeignKey(User, on_delete=models.CASCADE)
     project_name = models.CharField(max_length=100, verbose_name='Project Name')
     project_description = models.TextField(verbose_name='Description', null=True, blank=True)
-    project_assignee = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Assignee')
+    project_assignee = models.ForeignKey(User, on_delete=models.CASCADE, related_name='assignee')
     project_reporting_manager = models.CharField( max_length=100, verbose_name='Reporting Manager')
     project_bde_manager = models.CharField(max_length=200, verbose_name='BDE Manager')
     project_start_date = models.DateField(verbose_name="Start Date")
