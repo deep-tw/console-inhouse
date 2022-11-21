@@ -43,7 +43,7 @@ class Role(models.Model):
 class User(AbstractUser):
     role = models.ForeignKey(Role, null=True, blank=True, on_delete=models.CASCADE)
     mobile_number = models.CharField(max_length = 15, verbose_name = "Mobile No." )
-    designation = models.CharField(max_length = 45, verbose_name = "Designation")
+    designation = models.CharField(max_length = 255, verbose_name = "Designation")
     profile_picture = models.ImageField(upload_to="profile_pic",blank=True,null=True)
     certifications = models.FileField(upload_to = "certifications",blank=True,null=True)
     status = models.CharField(choices = status_choices, default = 'Select Status', max_length = 30 )

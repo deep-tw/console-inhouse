@@ -9,23 +9,23 @@
                     <th>Role</th>
                     <th>mobile_number</th>
                     <th>designation</th>
-                    <th> certifications</th>
+                    <th>Technologies</th>
                     <th>Status</th>
                     <th>Update</th>
                     <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
-                {% for users in alldevelopers %}
-                <tr><td>{{users.username}}</td>
-                    <td>{{users.email}}</td>
-                    <td>{{users.role}}</td>
-                    <td>{{users.mobile_number}}</td>
-                    <td>{{users.designation}}</td>
-                    <td>{{users.certifications}}</td>
-                    <td>{{users.status}}</td>
-                    <td><button type="button"  class="btn btn-success">Update</button></td> 
-                    <td><button type="button"  class="btn btn-danger" >Delete</button></td> 
+                {% for alldev in alldevelopers %}
+                <tr><td>{{alldev.username}}</td>
+                    <td>{{alldev.email}}</td>
+                    <td>{{alldev.role}}</td>
+                    <td>{{alldev.mobile_number}}</td>
+                    <td>{{alldev.designation}}</td>
+                    <td>{{alldev.technologies}}</td>
+                    <td>{{alldev.status}}</td>
+                    <td><a href="{% url "update_developer" id=alldev.id %}"><button type="button"  class="btn btn-success">Update</button></a></td> 
+                    <td><a href="{% url "delete_developer" id=alldev.id %}"><button type="button"  class="btn btn-danger">Delete</button></a></td>
                 </tr>
                 {% endfor %}
             </tbody>
