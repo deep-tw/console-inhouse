@@ -2,6 +2,7 @@ from django.shortcuts import render,HttpResponse, redirect
 from .models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import check_password
 
 
 @login_required
@@ -32,9 +33,11 @@ def registration(request):
 
 
 def loginview(request):
+    
     if request.method == 'POST':
         user_email=request.POST.get('email')
-        user_password = request.POST.get('password')
+        user_password =request.POST.get('password')
+        
         
         # users= User.objects.filter(email=user_email).exists()
         # if not users:
@@ -42,10 +45,9 @@ def loginview(request):
         #     return render(request, 'account/login.html',{'messages':message})
 
         user= authenticate(username=user_email, password=user_password)
-
+        
         if user is not None:
-            login(request,user)
-            print(user)
+            
             return redirect('index')
         else:
             message='You entered invalid credential for Email.,password or you may not registered as a User!!'

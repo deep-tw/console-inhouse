@@ -134,27 +134,27 @@ WSGI_APPLICATION = 'inhouse_console.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-
-user = urllib.parse.quote_plus('mridultw')
-passwd = urllib.parse.quote_plus('Python@123#')
-
 DATABASES = {
-        'default': {
-            'ENGINE': 'djongo',
-            'NAME': 'admindb',
-            'ENFORCE_SCHEMA': False,
-            'CLIENT': {
-                'host':f'mongodb+srv://{user}:{passwd}@cluster0.wraq4uw.mongodb.net/test'
-            }
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite1',
+    }
 }
+
+
+# user = urllib.parse.quote_plus('mridultw')
+# passwd = urllib.parse.quote_plus('Python@123#')
+
+# DATABASES = {
+#         'default': {
+#             'ENGINE': 'djongo',
+#             'NAME': 'admindb',
+#             'ENFORCE_SCHEMA': False,
+#             'CLIENT': {
+#                 'host':f'mongodb+srv://{user}:{passwd}@cluster0.wraq4uw.mongodb.net/test'
+#             }
+#         }
+# }
             
 
 
