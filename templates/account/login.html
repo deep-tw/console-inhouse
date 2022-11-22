@@ -51,7 +51,7 @@ background: linear-gradient(to right, rgb(247, 245, 248), rgb(248, 248, 250))
           <div class="card bg-dark text-white" style="border-radius: 1rem;">
             <div class="card-body p-5 text-center">
               
-                <form method="post">
+                <form action="{% url 'admindashboard' %}" method="post">
                   {% if messages %}
                 <p style="color: red;">{{ messages }}</p>
                 {% endif %}
@@ -73,7 +73,9 @@ background: linear-gradient(to right, rgb(247, 245, 248), rgb(248, 248, 250))
                   <label class="form-label" for="typePasswordX">Password</label>
                 </div>
   
+                <a href="">
                 <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+                </a>
                 <br><br>
                 
                <!-- <a href="#"></a> <i class="fa fa-twitter fa-2x" id="bd"></i></a>

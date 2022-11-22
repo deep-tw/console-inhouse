@@ -55,7 +55,7 @@ def loginview(request):
             print(type(user_role))
             if user_role == 'Admin' :
                 print('adminuser')
-                return redirect('admindashboard')
+                return HttpResponse("<h1>Rohit</h1>")
                 
             elif user_role == 'Manager':
                 print('manageruser')
