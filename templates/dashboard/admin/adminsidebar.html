@@ -1,0 +1,39 @@
+{% block sidebar %}
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+
+                    <br>
+                    <a class="nav-link" href="{% url 'admindashboard'%}" style="color: white">
+                        <div  class="fa fa-home" aria-hidden="true"><i class="fas fa-table"></i></div>
+                        Home
+                    </a>
+                    <div class="sb-sidenav-menu-heading">Role <p style="color:white ;"> {{user.role}}</p></div>
+                    
+                    <a class="nav-link" href="{% url 'allmanagers' %}" style="color: white">
+                        <div  class="fa fa-home" aria-hidden="true"><i class="fas fa-table"></i></div>
+                        Managers
+                    </a>
+                  
+
+                    <a class="nav-link" href="{% url 'alldevelopers' %}" style="color: white">
+                        <div  class="fa fa-home" aria-hidden="true"><i class="fas fa-table"></i></div>
+                        Developer
+                    </a>
+                    
+                    <a class="nav-link" href="#">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        Projects
+                    </a>
+                </div>
+            </div>
+            <div class="sb-sidenav-footer">
+                <div class="small">Logged in as:</div>
+                Start Bootstrap
+            </div>
+        </nav>
+    </div>
+
+    {% endblock sidebar %}

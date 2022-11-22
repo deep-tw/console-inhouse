@@ -1,0 +1,31 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+{% block bodycontent %}
+<div class="form-group">
+<div class="container" style="width:1000px;">
+  <div class="container" >
+	<center>
+    <h2> Update Developer </h2>
+  </center>
+  
+
+<div class="container">
+  <form action="" method="post">
+    {% csrf_token %}
+    <center>
+    <label for="mobile_number">Mobile Number</label><br>
+    <input type="text" id="mobile_number" name="mobile_number" value="{{ developer.mobile_number }}"><br>
+    <label for="designation">Designation</label><br>
+    <input type="text" id="designation" name="designation" value="{{ developer.designation }}"><br>
+    <label for="status">Status</label><br>
+    <input type="text" id="status" name="status" value="{{ developer.status }}"><br>
+    <label for="technologies">Technologies</label><br>
+    <input type="text" id="technologies" name="technologies" value="{{ developer.technologies }}"><br>
+    <input type="submit" value="Submit">
+  </center>
+  </form>
+</div>
+
+
+
+{% endblock %}
