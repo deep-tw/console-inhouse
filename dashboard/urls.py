@@ -3,7 +3,7 @@ from .import views
 from django.urls import path, include
 from dashboard.admin.views import admindashboard,alldevelopers,allmanagers,update_manager,delete_manager,update_developers,delete_developers
 from dashboard.manager.views import managerdashboard,allprojects,alldevelopers,update_developer,delete_developer
-from dashboard.developer.views import developerdashboard
+from dashboard.developer.views import developerdashboard,assignprojects
 from .views import index
 from account.rating.views import add_rating,update_rating,delete_rating,retrieve_rating
 
@@ -28,10 +28,9 @@ urlpatterns = [
     path('delete_developer/<int:id>', delete_developer, name='delete_developer'),
 
 
-
-
     #----------------Developer --------------------------------
     path('developerdashboard/', developerdashboard, name='developerdashboard'),
+    # path('assignprojects/', assignprojects, name='assignprojects'),
 
 
     #-----------------Project --------------------------------------

@@ -24,8 +24,8 @@
                     <td>{{alldev.designation}}</td>
                     <td>{{alldev.technologies}}</td>
                     <td>{{alldev.status}}</td>
-                    <td><a href="{% url "update_developer" id=alldev.id %}"><button type="button"  class="btn btn-success">Update</button></a></td> 
-                    <td><a href="{% url "delete_developer" id=alldev.id %}"><button type="button"  class="btn btn-danger">Delete</button></a></td>
+                    <td><a href="{% url 'update_developer' id=alldev.id %}"><button type="button"  class="btn btn-success">Update</button></a></td> 
+                    <td><a href="{% url 'delete_developer' id=alldev.id %}"><button type="button"  class="btn btn-danger">Delete</button></a></td>
                 </tr>
                 {% endfor %}
             </tbody>

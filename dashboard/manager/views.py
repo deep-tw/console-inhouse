@@ -21,13 +21,13 @@ def managerdashboard(request):
     # print(users,status,projects)
     return render (request,'dashboard/manager/managerhome.html',{'developers':developers,'role':role,'projects':projects})
 
+
 # List of all Projects
 def allprojects(request):
     # projects=Project.objects.all()
     manager=Project.objects.filter(project_reporting_manager=request.user)  
-    print(manager)    
+    print(manager)
     role= str(request.user.role)
-
     return render (request,'dashboard/manager/allProjects.html',locals())
 
 
@@ -65,6 +65,4 @@ def update_developer(request,id):
 def delete_developer(request,id):
     developers=User.objects.get(id=id)
     developers.delete()
-    return redirect('/alldevelopers/')       
-
-
+    return redirect('/alldevelopers/')
