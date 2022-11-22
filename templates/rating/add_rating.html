@@ -109,16 +109,16 @@ body {
 		<h2>Add Ratings</h2>
 		<p class="hint-text">Give Your Ratings</p>
        <div class="form-group">
-        	<input type="number" class="form-control" name="developer_rating" placeholder="Developer Rating" required="required">
+        	<input type="number" class="form-control" name="developer_rating" min="1" max="5" placeholder="Developer Rating" required="required">
         </div>
         <div class="form-group">
         	<input type="text" class="form-control" name="developer_name" placeholder="Developer Name" required="required">
         </div>
         <div class="form-group">
-        	<input type="text" class="form-control" name="created_by" placeholder="Created By" required="required">
+        	<input type="text" class="form-control" name="created_by" placeholder="Created By" required="required" >
         </div>
 		<div class="form-group">
-            <input type="text" class="form-control" name="updated_by" placeholder="Updated By" required="required">
+            <input type="text" class="form-control" name="updated_by" placeholder="Updated By" required="required" >
         </div>
 		<div class="form-group">
             <button type="submit" class="btn btn-success btn-lg btn-block">Submit</button>

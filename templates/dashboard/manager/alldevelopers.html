@@ -1,0 +1,33 @@
+{% extends "dashboard/base.html" %}
+
+{% block bodycontent %}
+<h3>All Developers</h3>
+        <table id="datatablesSimple">
+            <thead>
+                <tr><th>Username</th>
+                    <th>Email Id</th>
+                    <th>Role</th>
+                    <th>mobile_number</th>
+                    <th>designation</th>
+                    <th>Technologies</th>
+                    <th>Status</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for alldev in alldevelopers %}
+                <tr><td>{{alldev.username}}</td>
+                    <td>{{alldev.email}}</td>
+                    <td>{{alldev.role}}</td>
+                    <td>{{alldev.mobile_number}}</td>
+                    <td>{{alldev.designation}}</td>
+                    <td>{{alldev.technologies}}</td>
+                    <td>{{alldev.status}}</td>
+                    <td><a href="{% url 'update_developer' id=alldev.id %}"><button type="button"  class="btn btn-success">Update</button></a></td> 
+                    <td><a href="{% url 'delete_developer' id=alldev.id %}"><button type="button"  class="btn btn-danger">Delete</button></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}

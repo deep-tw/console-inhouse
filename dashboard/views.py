@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect,redirect
 from account.models import Project
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-
+from account.models import User
 # Create your views here.
 from django.utils import timezone
 import logging
@@ -11,22 +11,18 @@ import logging
 logger = logging.getLogger(__name__)
 @login_required 
 def index(request):
-    projects = Project.objects.all()
+    # print(request.user.role, type(request.user.role))
+    role= str(request.user.role)
     logger.error("Test!!")
     t = timezone.now()
     logging.debug("hello", t)
-    return render (request, 'dashboard/index.html',  {"project_data": projects})
-
-# def log(request):
-#     return render(request, 'dashboard/login.html')
-#     logger.error("Test!!")
-#     t = timezone.now()
-#     logging.debug("hello", t)
+    return render (request, 'dashboard/index.html', locals())
     
-#     return render (request, 'dashboard/index.html')
+
 
 def project(request):
-
+    role= str(request.user.role)
+    developers=User.objects.filter(role=3)
     try:
         user=request.user
         
@@ -39,11 +35,19 @@ def project(request):
             project_closing_date =request.POST.get('ClosingDate')
             project_remark=request.POST.get('remark')
             project_status=request.POST.get('ProjectStatus')
+            project_assignee=request.POST.get('cars')
+            
+            users=''
+            for x in developers:
+                if x.username == project_assignee:
+                    pass
+                    users=x
+            print(users,'@@@')
             
             projects = Project(
                 project_name = project_name,
                 project_description = project_description, 
-                project_assignee = user,
+                project_assignee = users,
                 project_reporting_manager = project_reporting_manager,
                 project_bde_manager = project_bde_manager,
                 project_start_date = project_start_date,
@@ -52,11 +56,11 @@ def project(request):
                 project_status = project_status
             )
             projects.save()
-            return redirect('/')
+            return redirect('managerdashboard')
 
     except Exception as e:
         print(e)
-    return render (request, 'projects/project_create.html', {'user':user} )
+    return render (request, 'dashboard/manager/project_create.html', {'developers':developers,'user':user,'role':role} )
 
 
 
@@ -68,12 +72,13 @@ def project(request):
 
 def delete_data(request, id):
     Project.objects.get(id=id).delete()
-    return redirect('/')
+    return redirect('managerdashboard')
 
 
 def update_data(request,id):
     user=request.user
-        
+    role= str(request.user.role)
+
     if request.method=="POST":
         project_name=request.POST.get('ProjectName')
         project_description=request.POST.get('description')
@@ -95,10 +100,7 @@ def update_data(request,id):
         project_data.project_remark = project_remark
         project_data.project_status = project_status
         project_data.save()
-        return redirect('/')
+        return redirect('managerdashboard')
 
     project = Project.objects.get(id=id)
-    return render (request, 'projects/project_update.html', {'project_data':project})
-
-
-    
+    return render (request, 'dashboard/manager/project_update.html', {'role':role,'project_data':project})
