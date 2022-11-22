@@ -5,13 +5,13 @@ from account.models import Project
 @login_required 
 def developerdashboard(request):
     role= str(request.user.role)
-
-    return render (request,'dashboard/developer/developerhome.html',locals())
+    assignprojects=Project.objects.filter(project_assignee=request.user)  
+    print(assignprojects)
+    return render(request,'dashboard/developer/developerhome.html',locals())
 
 def assignprojects(request):
-    # projects=Project.objects.all()
     assignprojects=Project.objects.filter(project_assignee=request.user)  
     print(assignprojects)
     role= str(request.user.role)
 
-    return render (request,'dashboard/developer/assignprojects.html',locals())
+    return render(request,'dashboard/developer/assignprojects.html',locals())

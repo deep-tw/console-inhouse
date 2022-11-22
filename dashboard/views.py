@@ -76,8 +76,9 @@ def delete_data(request, id):
 
 
 def update_data(request,id):
-    user=request.user
+    # user=request.user
     role= str(request.user.role)
+    developers=User.objects.filter(role=3)
 
     if request.method=="POST":
         project_name=request.POST.get('ProjectName')
@@ -103,4 +104,4 @@ def update_data(request,id):
         return redirect('managerdashboard')
 
     project = Project.objects.get(id=id)
-    return render (request, 'dashboard/manager/project_update.html', {'role':role,'project_data':project})
+    return render (request, 'dashboard/manager/project_update.html', {'role':role,'project_data':project,'developers':developers})

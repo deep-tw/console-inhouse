@@ -30,7 +30,7 @@ urlpatterns = [
 
     #----------------Developer --------------------------------
     path('developerdashboard/', developerdashboard, name='developerdashboard'),
-    # path('assignprojects/', assignprojects, name='assignprojects'),
+    # path('assign_projects/', assignprojects, name='assign_projects'),
 
 
     #-----------------Project --------------------------------------
