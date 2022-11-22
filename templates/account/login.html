@@ -51,7 +51,7 @@ background: linear-gradient(to right, rgb(247, 245, 248), rgb(248, 248, 250))
           <div class="card bg-dark text-white" style="border-radius: 1rem;">
             <div class="card-body p-5 text-center">
               
-                <form action="{% url 'admindashboard' %}" method="post">
+                <form method="post">
                   {% if messages %}
                 <p style="color: red;">{{ messages }}</p>
                 {% endif %}

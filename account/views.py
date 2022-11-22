@@ -6,7 +6,7 @@ from django.contrib.auth.hashers import check_password
 
 @login_required
 def home(request):
-    return render(request, 'account/home.html')
+    return redirect('login')
 
 
 #User Registration
@@ -37,7 +37,7 @@ def loginview(request):
     if request.method == 'POST':
         user_email=request.POST.get('email')
         user_password =request.POST.get('password')
-        
+       
         
         # users= User.objects.filter(email=user_email).exists()
         # if not users:
@@ -55,7 +55,7 @@ def loginview(request):
             print(type(user_role))
             if user_role == 'Admin' :
                 print('adminuser')
-                return HttpResponse("<h1>Rohit</h1>")
+                return redirect('admindashboard')
                 
             elif user_role == 'Manager':
                 print('manageruser')
