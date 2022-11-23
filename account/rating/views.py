@@ -18,7 +18,6 @@ def add_rating(request):
                 user_data.save()
                 return HttpResponseRedirect('/dashboard/retrieve_rating/')
         return render(request,'rating/add_rating.html')
-        
 
 def retrieve_rating(request):
         ratings=Rating.objects.all()
@@ -45,5 +44,3 @@ def delete_rating(request,id):
     ratings=Rating.objects.get(id=id)
     ratings.delete()
     return HttpResponseRedirect('/dashboard/retrieve_rating/')
-
-        

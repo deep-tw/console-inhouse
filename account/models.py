@@ -41,6 +41,7 @@ class Role(models.Model):
     
 
 class User(AbstractUser):
+    id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     role = models.ForeignKey(Role, null=True, blank=True, on_delete=models.CASCADE)
     mobile_number = models.CharField(max_length = 15, verbose_name = "Mobile No." )
     designation = models.CharField(max_length = 255, verbose_name = "Designation")
@@ -48,7 +49,9 @@ class User(AbstractUser):
     certifications = models.FileField(upload_to = "certifications",blank=True,null=True)
     status = models.CharField(choices = status_choices, default = 'Select Status', max_length = 30 )
     technologies = models.CharField(choices = technologies_known, default = 'Select Technology',  max_length = 35)
-
+    # class Meta:
+    #     verbose_name = 'account'
+    #     verbose_name_plural = 'accounts'
     def __obj__(self):
         return self.role
 
@@ -82,9 +85,10 @@ class Project(BaseModel):
     def __str__(self):
         return self.project_name
 
+
 class ProjectAssign(BaseModel):
-    project_name=models.ForeignKey(Project,on_delete=models.SET_NULL,null=True, related_name='project')
-    project_assignee = models.ForeignKey(User, on_delete=models.SET_NULL,null=True, related_name='assignee')
+    project_name=models.ForeignKey(Project,on_delete=models.CASCADE,null=True, related_name='project')
+    project_assignee = models.ForeignKey(User, on_delete=models.CASCADE,null=True, related_name='assignee')
     project_reporting_manager = models.CharField( max_length=100, verbose_name='Reporting Manager')
     project_bde_manager = models.CharField(max_length=200, verbose_name='BDE Manager')
     project_start_date = models.DateField(verbose_name="Start Date")

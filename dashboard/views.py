@@ -16,9 +16,9 @@ def index(request):
     logger.error("Test!!")
     t = timezone.now()
     logging.debug("hello", t)
-    return render (request, 'dashboard/index.html', locals())
+    # return redirect('create_project')
+    return render(request,'dashboard/index.html')
     
-
 
 def project(request):
     role= str(request.user.role)
