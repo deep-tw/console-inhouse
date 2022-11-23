@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect,redirect
-from account.models import Project
+from account.models import Project,ProjectAssign
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from account.models import User
@@ -23,19 +23,20 @@ def index(request):
 def project(request):
     role= str(request.user.role)
     developers=User.objects.filter(role=3)
+    project=Project.objects.all()
+    # projecta=ProjectAssign.objects.all()
     try:
         user=request.user
         
         if request.method=="POST":
-            project_name=request.POST.get('ProjectName')
-            project_description=request.POST.get('description')
+            project_name=request.POST.get('proj')
             project_reporting_manager=request.POST.get('ReportingManager')
             project_bde_manager=request.POST.get('BDEManager')
             project_start_date=request.POST.get('StartDate')
             project_closing_date =request.POST.get('ClosingDate')
             project_remark=request.POST.get('remark')
             project_status=request.POST.get('ProjectStatus')
-            project_assignee=request.POST.get('cars')
+            project_assignee=request.POST.get('dev')
             
             users=''
             for x in developers:
@@ -43,10 +44,16 @@ def project(request):
                     pass
                     users=x
             print(users,'@@@')
-            
-            projects = Project(
-                project_name = project_name,
-                project_description = project_description, 
+
+            pro=''
+            for x in project:
+                if x.project_name == project_name:
+                    pass
+                    pro=x
+            print(pro,'###')
+  
+            projects = ProjectAssign(
+                project_name = pro,
                 project_assignee = users,
                 project_reporting_manager = project_reporting_manager,
                 project_bde_manager = project_bde_manager,
@@ -60,7 +67,7 @@ def project(request):
 
     except Exception as e:
         print(e)
-    return render (request, 'dashboard/manager/project_create.html', {'developers':developers,'user':user,'role':role} )
+    return render (request, 'dashboard/manager/project_create.html', {'developers':developers,'user':user,'role':role,'project':project} )
 
 
 
@@ -71,7 +78,7 @@ def project(request):
 
 
 def delete_data(request, id):
-    Project.objects.get(id=id).delete()
+    ProjectAssign.objects.get(id=id).delete()
     return redirect('managerdashboard')
 
 
@@ -80,20 +87,16 @@ def update_data(request,id):
     role= str(request.user.role)
     developers=User.objects.filter(role=3)
 
+
     if request.method=="POST":
-        project_name=request.POST.get('ProjectName')
-        project_description=request.POST.get('description')
         project_reporting_manager=request.POST.get('ReportingManager')
         project_bde_manager=request.POST.get('BDEManager')
         project_start_date=request.POST.get('StartDate')
         project_closing_date =request.POST.get('ClosingDate')
         project_remark=request.POST.get('remark')
         project_status=request.POST.get('ProjectStatus')
-    
 
-        project_data = Project.objects.get(id=id)
-        project_data.project_name = project_name
-        project_data.project_description = project_description
+        project_data = ProjectAssign.objects.get(id=id)
         project_data.project_reporting_manager = project_reporting_manager
         project_data.project_bde_manager = project_bde_manager
         project_data.project_start_date = project_start_date
@@ -103,5 +106,6 @@ def update_data(request,id):
         project_data.save()
         return redirect('managerdashboard')
 
-    project = Project.objects.get(id=id)
+    project = ProjectAssign.objects.get(id=id)
+
     return render (request, 'dashboard/manager/project_update.html', {'role':role,'project_data':project,'developers':developers})

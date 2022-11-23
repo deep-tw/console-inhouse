@@ -103,21 +103,25 @@
       {% csrf_token %}
 		<h2>Add Project</h2>
 		<p class="hint-text">Add you project</p>
-    
+		<div class="form-group">
+		
+			
+			  </div>
         <div class="form-group">
 			<div class="row">
-				<div class="col"><input type="text" class="form-control" name="ProjectName" placeholder="Project Name" required="required"></div>
-				
+				<select name="proj" id="proj">
+					<label >Project Name</label>        
+					<!-- <option value="{{ user }}">{{ user }}</option> -->
+					{% for u in project %}
+					 <option value="{{u}}">{{u}}</option> 
+					{% endfor %}
+				  </select>				
 			</div> 
-
-        </div>
-        <div class="form-group">
-        	<input type="text" class="form-control" name="description" placeholder="Description" required="required">
         </div>
 
 		<div class="form-group">
 		
-      <select name="cars" id="cars">
+      <select name="dev" id="dev">
         <label >Project Assignee</label>        
         <!-- <option value="{{ user }}">{{ user }}</option> -->
 		{% for u in developers %}

@@ -48,6 +48,8 @@ button:hover, a:hover {
         <h1>{{user.username}}</h1>
        <p class="title">role : {{user.role}}</p>
         <p>{{user.designation}}</p>
+        <p>{{user.email}}</p>
+
         <p>{{user.status}}</p>
         <p>{{user.technologies}}</p>
         <p>{{user.mobile_number}}</p>
@@ -55,11 +57,7 @@ button:hover, a:hover {
 </center>
 <br><br>
 
-<h2>Assign Projects </h2>
-<br>
-{% for projects in assignprojects %}
-<p> {{projects}}</p>
-{% endfor %}
+
 
 
 <!-- 

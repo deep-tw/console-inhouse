@@ -1,11 +1,10 @@
 from django.shortcuts import render,HttpResponseRedirect,redirect
 from django.contrib.auth.decorators import login_required
-from account.models import User,Project
+from account.models import User,Project,ProjectAssign
 
 
 @login_required 
 def managerdashboard(request):
-    role= str(request.user.role)
     role= str(request.user.role)
     # print(str(request.user.role.id))
     user_id=request.user.id
@@ -15,29 +14,36 @@ def managerdashboard(request):
     # for x in users:
     #     print(x.id,x.email,x.username,x.status)
     # projects=Project.objects.all().count()
-    projects=Project.objects.filter(project_reporting_manager=request.user).count()
+    projects=ProjectAssign.objects.filter(project_reporting_manager=request.user).count()
     developers=User.objects.filter(role=3).count()
 
-    # print(users,status,projects)
-    return render (request,'dashboard/manager/managerhome.html',{'developers':developers,'role':role,'projects':projects})
+    return render (request,'dashboard/manager/managerhome.html',locals())
 
 
 # List of all Projects
 def allprojects(request):
     # projects=Project.objects.all()
-    manager=Project.objects.filter(project_reporting_manager=request.user)  
-    print(manager)
+    manager=ProjectAssign.objects.filter(project_reporting_manager=request.user)
     role= str(request.user.role)
     return render (request,'dashboard/manager/allProjects.html',locals())
 
 
 # List of all Developers
 def alldevelopers(request):
+
     role= str(request.user.role)
     # proj= Project.objects.get(project_name="Yurie").prefetch_related('project_assignee')
     # print(proj)
     # proj=Project.objects.filter(project_assignee__designation="Yurie")
     alldevelopers=User.objects.filter(role=3)
+
+    # for dev in alldevelopers:
+    #     if Project.objects.filter(project_assignee=dev) and Project.objects.filter(project_reporting_manager=request.user):
+    #         print(dev)
+
+    # devl=[ProjectAssign.objects.filter(project_assignee=dev) for dev in alldevelopers]
+    # print(devl,'&&&')
+    
     return render (request, 'dashboard/manager/alldevelopers.html',locals())    
   
 
@@ -66,3 +72,4 @@ def delete_developer(request,id):
     developers=User.objects.get(id=id)
     developers.delete()
     return redirect('/alldevelopers/')
+

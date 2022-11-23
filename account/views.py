@@ -40,26 +40,20 @@ def loginview(request):
         # if not users:
         #     message='Invalid Login Credentials!!'
         #     return render(request, 'account/login.html',{'messages':message})
-
+        
         user= authenticate(username=user_email, password=user_password)
         if user is not None:
             login(request,user)
-            print(user)
             get_user=User.objects.get(email=user_email)
-            print(get_user.username,get_user.password,get_user.email,get_user.role)
             user_role=str(get_user.role)
-            print(type(user_role))
             if user_role == 'Admin' :
-                print('adminuser')
                 return redirect('admindashboard')
                 
             elif user_role == 'Manager':
-                print('manageruser')
                 
                 return redirect('managerdashboard')
 
             elif user_role == 'Developer':
-                print('developeruser')
 
                 return redirect('developerdashboard')
 
