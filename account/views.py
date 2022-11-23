@@ -2,7 +2,7 @@ from django.shortcuts import render,HttpResponse, redirect
 from .models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.hashers import make_password,check_password
 @login_required
 def home(request):
     return render(request, 'account/home.html')
@@ -35,6 +35,8 @@ def loginview(request):
     if request.method == 'POST':
         user_email=request.POST.get('email')
         user_password = request.POST.get('password')
+        print(user_email)
+        print(user_password,'uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu')
 
         # users= User.objects.filter(email=user_email).exists()
         # if not users:
@@ -42,6 +44,7 @@ def loginview(request):
         #     return render(request, 'account/login.html',{'messages':message})
 
         user= authenticate(username=user_email, password=user_password)
+        print(user)
         if user is not None:
             login(request,user)
             print(user)

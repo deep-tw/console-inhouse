@@ -187,42 +187,7 @@ LOGIN_URL='/account/login'
 AUTHENTICATION_BACKENDS = ['account.backends.EmailBackend'] 
 
 
-# DataFlair #Logging Information
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'formatters': {
-#         'verbose': {
-#             'format': '{levelname} {asctime} {module} {process:d} {tread:hd} {message}',
-#             'style': '{',
-#         },
-#         'simple': {
-#             'format': '{levelname} {message}',
-#             'style': '{',
-#         },
-#     },
-#     'handlers': {
-#         'file': {
-#             'level': 'DEBUG',
-#             'class': 'logging.handlers.TimedRotatingFileHandler',
-#             'filename': ('logs/inhouse.log'),
-#             'formatter': 'verbose',
-#             'when': 'midnight',
-#             'interval': 1,
-#         },
-#     },
-#     'root': {
-#         'handlers': ['file'],
-#         'level': 'DEBUG',
-#     },
-#     'loggers': {
-#         'django': {
-#             'handlers': ['file'],
-#             'level': 'DEBUG',
-#             'propagate': True,
-#         },
-#     },
-# }
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -258,3 +223,8 @@ LOGGING = {
         },
     },
 }
+
+
+
+
+
