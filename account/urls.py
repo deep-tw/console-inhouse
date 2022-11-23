@@ -1,5 +1,4 @@
 from django.urls import path, include
-from .views import loginview,registration,logoutview,home
 from .views import loginview,registration,logoutview,home,change_password
 from django.contrib.auth import views as auth_views
 

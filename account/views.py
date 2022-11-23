@@ -2,10 +2,11 @@ from django.shortcuts import render,HttpResponse, redirect
 from .models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import check_password
 
 @login_required
 def home(request):
-    return render(request, 'account/home.html')
+    return redirect('login')
 
 
 #User Registration
@@ -32,16 +33,19 @@ def registration(request):
 
 #User Login
 def loginview(request):
+    
     if request.method == 'POST':
         user_email=request.POST.get('email')
-        user_password = request.POST.get('password')
-
+        user_password =request.POST.get('password')
+       
+        
         # users= User.objects.filter(email=user_email).exists()
         # if not users:
         #     message='Invalid Login Credentials!!'
         #     return render(request, 'account/login.html',{'messages':message})
 
         user= authenticate(username=user_email, password=user_password)
+        
         if user is not None:
             login(request,user)
             print(user)
@@ -66,7 +70,7 @@ def loginview(request):
         else:
             message='You entered invalid credential for Email.,password or you may not registered as a User!!'
             return render(request,'account/login.html',{'messages':message})
-        
+
     return render(request, 'account/login.html')
 
 def logoutview(request):

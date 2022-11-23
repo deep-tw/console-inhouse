@@ -22,21 +22,7 @@
             <!-- Navbar Search-->
         
             {% if user.is_authenticated %}
-            <!-- <p style="color: white;" >Username : </p> <h4 style="color: wh ite;">{{user}}</h4>  -->
-            <!-- <a class="navbar-brand ps-3" href="{% url 'logout' %} ">Logout</a>
-
-            <a class="navbar-brand ps-3" href="{% url 'change_password' %} ">Change password</a> -->
-
-          
-             <!-- <li class="nav-item">
-                 <a class="nav-link active"  tabindex="-1" aria-disabled="true"></a>
-               </li> -->
-               <!-- <li class="nav-item">
-                 <a class="nav-link active" href="{% url 'change_password' %}" tabindex="-1" aria-disabled="true">Change password</a>
-               </li> -->
-               <!-- <li class="nav-item">
-                 <a class="nav-link active" href="#" tabindex="-1" aria-disabled="true">Settings</a>
-               </li> -->
+           
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -61,7 +47,7 @@
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{% url 'logout' %} ">Logout</a></li>
-                        <li><a class="dropdown-item" href="{% url 'change_password' %}">Change passwrd</a></li>
+                        <li><a class="dropdown-item" href="{% url 'change_password' %}">Change password</a></li>
                     </ul>
                 </li>
             </ul>
