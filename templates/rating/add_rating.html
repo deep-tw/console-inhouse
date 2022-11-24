@@ -103,6 +103,9 @@ body {
 	<div class="signup-form">
 		<form action="" method="post">
 			{% csrf_token %}
+			{% if message %}
+			<p style="color: red">{{message}}</p>
+			{% endif %}
 			<h2>Add Ratings</h2>
 			<p class="hint-text">Give Your Ratings</p>
 		   <div class="form-group">

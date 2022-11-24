@@ -79,7 +79,8 @@ def allratings(request):
     role= str(request.user.role)
     ratings=Rating.objects.all()
     for x in ratings:
+        print(x.__dict__)
         print(x.developer_rating,x.developer_name)
-        
+
     return render(request,'dashboard/manager/allratings.html',locals())
 

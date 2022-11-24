@@ -48,7 +48,7 @@ urlpatterns = [
     #---------------------Ratings------------------------------------
     path('create_rating/',add_rating,name='create'),
     path('retrieve_rating/',retrieve_rating,name='retrieve'),
-    path('update_rating/<int:id>/',update_rating,name='update'),
+    path('update_rating/<int:id>/<int:userid>',update_rating,name='update'),
     path('delete_rating/<int:id>/',delete_rating,name='delete')
 
 ]

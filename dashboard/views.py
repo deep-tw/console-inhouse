@@ -11,13 +11,26 @@ import logging
 logger = logging.getLogger(__name__)
 @login_required 
 def index(request):
-    # print(request.user.role, type(request.user.role))
-    role= str(request.user.role)
     logger.error("Test!!")
     t = timezone.now()
     logging.debug("hello", t)
-    # return redirect('create_project')
-    return render(request,'dashboard/index.html')
+    # print(request.user.role, type(request.user.role))
+    user_role= str(request.user.role)
+    print(user_role,"&&&")
+
+    if user_role == 'Admin' :
+        return redirect('admindashboard')
+                
+    elif user_role == 'Manager':
+                
+        return redirect('managerdashboard')
+
+    elif user_role == 'Developer':
+
+        return redirect('developerdashboard')
+    else:
+        return render(request,'dashboard/userrole.html')
+
     
 
 def project(request):

@@ -60,12 +60,14 @@ def loginview(request):
             elif user_role == 'Developer':
 
                 return redirect('developerdashboard')
-
+            else:
+                return render(request,'dashboard/userrole.html')
         else:
             message='You entered invalid credential for Email.,password or you may not registered as a User!!'
             return render(request,'account/login.html',{'messages':message})
 
     return render(request, 'account/login.html')
+
 
 def logoutview(request):
     logout(request)

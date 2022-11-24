@@ -8,14 +8,12 @@ def developerdashboard(request):
     assignprojects=ProjectAssign.objects.filter(project_assignee=request.user).count() 
     rating_flag=True
     try:
-
         ratings=Rating.objects.get(developer_name=request.user)
-        print(ratings.__dict__,'####')
-
+        
     except:
         rating_flag=False
         return render(request,'dashboard/developer/developerhome.html',locals())
-        
+
     return render(request,'dashboard/developer/developerhome.html',locals())
 
 def assignprojects(request):

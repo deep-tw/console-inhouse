@@ -87,15 +87,15 @@ class Project(BaseModel):
 
 
 class ProjectAssign(BaseModel):
-    project_name=models.ForeignKey(Project,on_delete=models.SET_NULL,null=True, related_name='project')
-    project_assignee = models.ForeignKey(User, on_delete=models.SET_NULL,null=True, related_name='assignee')
+    project_name=models.ForeignKey(Project,on_delete=models.CASCADE,null=True, related_name='project')
+    project_assignee = models.ForeignKey(User, on_delete=models.CASCADE,null=True, related_name='assignee')
     project_reporting_manager = models.CharField( max_length=100, verbose_name='Reporting Manager')
     project_bde_manager = models.CharField(max_length=200, verbose_name='BDE Manager')
     project_start_date = models.DateField(verbose_name="Start Date")
     project_closing_date = models.DateField(verbose_name='Closing Date')
     project_remark = models.TextField(verbose_name='Remark', null=True, blank=True )
     project_status = models.CharField(choices=project_status, max_length=50, default='Not Started' ,verbose_name='Status')
-    
+
 
 class ManagerModel(models.Model):
     users = models.ForeignKey(User, on_delete = models.CASCADE,blank=True, null=True)
