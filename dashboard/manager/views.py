@@ -45,9 +45,8 @@ def alldevelopers(request):
     # print(devl,'&&&')
     
     return render (request, 'dashboard/manager/alldevelopers.html',locals())    
-  
 
-# update Developer
+#Update Developer
 def update_developer(request,id):
         role= str(request.user.role)
         if request.method=="POST":
@@ -60,12 +59,34 @@ def update_developer(request,id):
                 obj.designation=designation
                 obj.status=status
                 obj.technologies=technologies
+                print(designation,"$$$$$$$$$$$$")
                 obj.save()
                 return redirect('/alldevelopers/')
         developers=User.objects.get(id=id)
-        print(developers,'kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk')
         # breakpoint()
-        return render(request,'dashboard/manager/update_developer.html',{'developer':developers,'role':role})
+        print(developers,"FFFFFFFFFFFFFFFFFFFFffff")
+        print(developers.designation)
+        return render(request,'dashboard/manager/update_developer.html',{'developers':developers,'role':role})
+
+# # update Developer
+# def update_developer(request,id):
+#         role= str(request.user.role)
+#         if request.method=="POST":
+#                 mobile_number=request.POST['mobile_number']
+#                 designation=request.POST['designation']
+#                 status=request.POST['status']
+#                 technologies=request.POST['technologies']
+#                 obj=User.objects.get(id=id)
+#                 obj.mobile_number=mobile_number
+#                 obj.designation=designation
+#                 obj.status=status
+#                 obj.technologies=technologies
+#                 obj.save()
+#                 return redirect('/alldevelopers/')
+#         developers=User.objects.get(id=id)
+#         print(developers,'kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk')
+#         # breakpoint()
+#         return render(request,'dashboard/manager/update_developer.html',{'developer':developers,'role':role})
 
 # Delete Developer
 def delete_developer(request,id):
@@ -78,9 +99,6 @@ def delete_developer(request,id):
 def allratings(request):
     role= str(request.user.role)
     ratings=Rating.objects.all()
-    for x in ratings:
-        print(x.__dict__)
-        print(x.developer_rating,x.developer_name)
 
     return render(request,'dashboard/manager/allratings.html',locals())
 

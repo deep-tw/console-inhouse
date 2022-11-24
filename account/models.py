@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinValueValidator, MaxValueValidator
 from inhouse_console import settings
 
+
 status_choices = (
 ('Working' , 'Working'),
 ('Available' , 'Available'),
@@ -70,13 +71,6 @@ class BaseModel(models.Model):
         abstract = True
 
 
-class Rating(BaseModel):
-    developer_rating=models.IntegerField(default=0,validators=[MinValueValidator(0),MaxValueValidator(5)],verbose_name='developer rating')
-    developer_name=models.ForeignKey(User,on_delete=models.CASCADE,verbose_name="developer_name",blank = True)
-    
-    def __str__(self):
-        return str(self.developer_name)
-
 class Project(BaseModel):
     # user = models.ForeignKey(User, on_delete=models.CASCADE)
     project_name = models.CharField(max_length=100, verbose_name='Project Name')
@@ -102,5 +96,16 @@ class ManagerModel(models.Model):
     projects=models.ForeignKey(Project,on_delete=models.CASCADE)   
 
 
+class Rating(BaseModel):
+    developer_rating=models.IntegerField(default=0,validators=[MinValueValidator(0),MaxValueValidator(10)],verbose_name='developer rating')
+    developer_name=models.ForeignKey(User,on_delete=models.CASCADE,verbose_name="developer_name",blank = True)
+    
+    def __str__(self):
+        return str(self.developer_name)
 
-
+class ManagerRating(BaseModel):
+    developer_rating=models.IntegerField(default=0,validators=[MinValueValidator(0),MaxValueValidator(10)],verbose_name='developer rating')
+    developer_name=models.ForeignKey(User,on_delete=models.CASCADE,verbose_name="developer_name",blank = True)
+    
+    def __str__(self):
+        return str(self.developer_name)

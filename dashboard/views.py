@@ -64,7 +64,7 @@ def project(request):
                     pass
                     pro=x
             print(pro,'###')
-  
+
             projects = ProjectAssign(
                 project_name = pro,
                 project_assignee = users,
@@ -110,6 +110,7 @@ def update_data(request,id):
         project_status=request.POST.get('ProjectStatus')
 
         project_data = ProjectAssign.objects.get(id=id)
+        
         project_data.project_reporting_manager = project_reporting_manager
         project_data.project_bde_manager = project_bde_manager
         project_data.project_start_date = project_start_date
@@ -122,6 +123,3 @@ def update_data(request,id):
     project = ProjectAssign.objects.get(id=id)
 
     return render (request, 'dashboard/manager/project_update.html', {'role':role,'project_data':project,'developers':developers})
-
-
-

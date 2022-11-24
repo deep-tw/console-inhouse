@@ -14,13 +14,13 @@
     {% csrf_token %}
     <center>
     <label for="mobile_number">Mobile Number</label><br>
-    <input type="text" id="mobile_number" name="mobile_number" value="{{ developer.mobile_number }}"><br>
+    <input type="text" id="mobile_number" name="mobile_number" value="{{ developers.mobile_number }}"><br>
     <label for="designation">Designation</label><br>
-    <input type="text" id="designation" name="designation" value="{{ developer.designation }}"><br>
+    <input type="text" id="designation" name="designation" value="{{ developers.designation }}"><br>
     <label for="status">Status</label><br>
-    <input type="text" id="status" name="status" value="{{ developer.status }}"><br>
+    <input type="text" id="status" name="status" value="{{ developers.status }}"><br>
     <label for="technologies">Technologies</label><br>
-    <input type="text" id="technologies" name="technologies" value="{{ developer.technologies }}"><br>
+    <input type="text" id="technologies" name="technologies" value="{{ developers.technologies }}"><br>
     <input type="submit" value="Submit">
   </center>
   </form>

@@ -35,7 +35,6 @@ urlpatterns = [
     path('assignprojects/', assignprojects, name='assignprojects'),
 
 
-
     #-----------------Project --------------------------------------
     path('', views.index, name='index'),
     path('project/',views.project, name='project_create'),
