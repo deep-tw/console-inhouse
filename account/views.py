@@ -1,11 +1,13 @@
 from django.shortcuts import render,HttpResponse, redirect
-from .models import User
+from .models import User,ForgotPassword
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.hashers import make_password,check_password
+from django.contrib.auth.hashers import make_password
+from .task import *
+
 @login_required
 def home(request):
-    return render(request, 'account/home.html')
+    return redirect('login')
 
 
 #User Registration
@@ -32,26 +34,28 @@ def registration(request):
 
 #User Login
 def loginview(request):
+    
     if request.method == 'POST':
         user_email=request.POST.get('email')
         user_password = request.POST.get('password')
-        print(user_email)
-        print(user_password,'uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu')
-
+      
+  
+       
+        
         # users= User.objects.filter(email=user_email).exists()
         # if not users:
         #     message='Invalid Login Credentials!!'
         #     return render(request, 'account/login.html',{'messages':message})
 
         user= authenticate(username=user_email, password=user_password)
-        print(user)
+        
         if user is not None:
             login(request,user)
             print(user)
             get_user=User.objects.get(email=user_email)
             print(get_user.username,get_user.password,get_user.email,get_user.role)
             user_role=str(get_user.role)
-            print(type(user_role))
+            # print(type(user_role))
             if user_role == 'Admin' :
                 print('adminuser')
                 return redirect('admindashboard')
@@ -69,7 +73,7 @@ def loginview(request):
         else:
             message='You entered invalid credential for Email.,password or you may not registered as a User!!'
             return render(request,'account/login.html',{'messages':message})
-        
+
     return render(request, 'account/login.html')
 
 def logoutview(request):
@@ -94,4 +98,49 @@ def change_password(request):
             return render(request,'account/change_password.html',{'messages':"new password and confirm password are not match"})
 
     return render(request,'account/change_password.html',locals())
+
+
+
+
+list1= []
+def send_mail_to_all(request):
+    if request.method == 'POST':
+        user_email=request.POST.get('email')
+        is_user_exists = User.objects.filter(email=user_email).exists()
+        if is_user_exists:
+            send_mail_func.delay(user_email)
+            user  = User.objects.filter(email = user_email)
+            user_name =user[0]
+            breakpoint()
+            list1.append(user_name)
+            return render(request, 'account/popup.html')
+        
+        else:
+            message= 'This Email is not registered with us,Please provide Correct Email!!'
+            return render(request, 'account/reset_password.html',{'message':message})
+    return render(request,"account/reset_password.html")
+
+            
+def reset_password(request):
+    if request.method == 'POST':
+        password1=request.POST.get('password1')
+        password2=request.POST.get('password2')
+        user_name=list1[0]
+        if password1==password2:
+            user_name.set_password(password1)
+            user_name.save()
+            return redirect('/account')
+        else:
+            message="Password mismatch"
+            return render(request,"account/forgot_password.html",{'message':message})
+    return render(request,"account/forgot_password.html")
+        
+
+
+
+
+    
+           
+            
+            
 

@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
-# from pymongo import MongoClient
+from pymongo import MongoClient
 # import dns
 import urllib
 import sys
@@ -43,15 +43,55 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'dashboard',
     'account',
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.google',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    
 ]
 
-AUTH_USER_MODEL = 'account.User'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+]
+
+SOCIALACCOUNT_PROVIDERS = {
+    
+    'google': {
+        'APP': {
+        'client_id':'225822954063-k49066dctnhq6gqpjk99mtnbgjheboe2.apps.googleusercontent.com',
+        'secret':'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',
+        'key':''
+       
+      },
+    "SCOPE": [
+            "profile",
+            "email",
+        ],
+    }
+}
+
+
+
+SITE_ID = 2
+
+SOCIALACCOUNT_LOGIN_ON_GET=True
+LOGIN_REDIRECT_URL = '/account/login/'
+
+LOGOUT_REDIRECT_URL = '/account/login/'
+# ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_UNIQUE_EMAIL = True
+# ACCOUNT_AUTHENTICATION_METHOD = "email"
+# ACCOUNT_USERNAME_REQUIRED = False
+# ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+
+AUTH_USER_MODEL = 'aditya.User'
+
+
 
 
 MIDDLEWARE = [
@@ -97,7 +137,7 @@ WSGI_APPLICATION = 'inhouse_console.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite1',
     }
 }
 
@@ -169,21 +209,6 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-AUTHENTICATION_BACKENDS = [
-    'social_core.backends.google.GoogleOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-]
-LOGIN_URL = 'account/login'
-LOGIN_REDIRECT_URL = 'account/home'
-LOGOUT_URL = 'account/logout'
-LOGOUT_REDIRECT_URL = 'account/login'
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1090651221584-8vfk1au184h480q6f8j93qketkb0pof6.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
-
-
-LOGIN_URL='/account/login'
-
-
 AUTHENTICATION_BACKENDS = ['account.backends.EmailBackend'] 
 
 
@@ -225,6 +250,19 @@ LOGGING = {
 }
 
 
+
+# Celery settings
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "noreply.hardcodez@gmail.com"
+EMAIL_HOST_PASSWORD = "aukhbsznhmcfvrxj"
 
 
 
