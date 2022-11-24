@@ -73,7 +73,7 @@ class BaseModel(models.Model):
 class Rating(BaseModel):
     developer_rating=models.IntegerField(default=0,validators=[MinValueValidator(0),MaxValueValidator(5)],verbose_name='developer rating')
     developer_name=models.ForeignKey(User,on_delete=models.CASCADE,verbose_name="developer_name",blank = True)
-
+    
     def __str__(self):
         return str(self.developer_name)
 
@@ -87,8 +87,8 @@ class Project(BaseModel):
 
 
 class ProjectAssign(BaseModel):
-    project_name=models.ForeignKey(Project,on_delete=models.CASCADE,null=True, related_name='project')
-    project_assignee = models.ForeignKey(User, on_delete=models.CASCADE,null=True, related_name='assignee')
+    project_name=models.ForeignKey(Project,on_delete=models.SET_NULL,null=True, related_name='project')
+    project_assignee = models.ForeignKey(User, on_delete=models.SET_NULL,null=True, related_name='assignee')
     project_reporting_manager = models.CharField( max_length=100, verbose_name='Reporting Manager')
     project_bde_manager = models.CharField(max_length=200, verbose_name='BDE Manager')
     project_start_date = models.DateField(verbose_name="Start Date")

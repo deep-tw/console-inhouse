@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponseRedirect
+from django.shortcuts import render,HttpResponseRedirect,redirect
 from account.models import Rating , User
 
 # def index(request):
@@ -7,6 +7,7 @@ from account.models import Rating , User
 #         return render(request,'rating/retrieve_rating.html',{'dev_rating':ratings})  
 
 def add_rating(request):
+        role= str(request.user.role)
         if request.method == 'POST':
                 
                 developer_rating=request.POST['developer_rating']
@@ -16,8 +17,8 @@ def add_rating(request):
                 user_data =Rating.objects.create(developer_rating=developer_rating,developer_name=developer_name,
                                                  created_by=created_by,updated_by=updated_by)
                 user_data.save()
-                return HttpResponseRedirect('/dashboard/retrieve_rating/')
-        return render(request,'rating/add_rating.html')
+                return redirect('developerdashboard')
+        return render(request,'rating/add_rating.html',locals())
 
 def retrieve_rating(request):
         ratings=Rating.objects.all()
@@ -35,7 +36,7 @@ def update_rating(request,id):
                 created_by=created_by
                 updated_by=updated_by
                 obj.save()
-                return HttpResponseRedirect('/dashboard/retrieve_rating/')
+                return redirect('managerdashboard')
         ratings=Rating.objects.get(id=id)
         return render(request,'rating/update_rating.html',{'dev_rating':ratings})
                           

@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+
 from pathlib import Path
 import os
 from pymongo import MongoClient
@@ -90,9 +91,6 @@ LOGOUT_REDIRECT_URL = '/'
 # ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 
 AUTH_USER_MODEL = 'aditya.User'
-
-
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

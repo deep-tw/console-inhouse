@@ -1,6 +1,6 @@
 from django.shortcuts import render,HttpResponseRedirect,redirect
 from django.contrib.auth.decorators import login_required
-from account.models import User,Project,ProjectAssign
+from account.models import User,Project,ProjectAssign,Rating
 
 
 @login_required 
@@ -72,4 +72,14 @@ def delete_developer(request,id):
     developers=User.objects.get(id=id)
     developers.delete()
     return redirect('/alldevelopers/')
+
+
+
+def allratings(request):
+    role= str(request.user.role)
+    ratings=Rating.objects.all()
+    for x in ratings:
+        print(x.developer_rating,x.developer_name)
+        
+    return render(request,'dashboard/manager/allratings.html',locals())
 
