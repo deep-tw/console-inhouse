@@ -109,3 +109,10 @@ class ManagerRating(BaseModel):
     
     def __str__(self):
         return str(self.developer_name)
+    
+    
+    
+    
+   
+   
+   

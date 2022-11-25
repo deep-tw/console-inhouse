@@ -2,7 +2,8 @@ from django.shortcuts import render,HttpResponse, redirect
 from .models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.hashers import check_password
+from django.contrib.auth.hashers import make_password
+from .task import *
 
 @login_required
 def home(request):
@@ -36,7 +37,9 @@ def loginview(request):
     
     if request.method == 'POST':
         user_email=request.POST.get('email')
-        user_password =request.POST.get('password')
+        user_password = request.POST.get('password')
+      
+  
        
         print(user_email,user_password)
         # users= User.objects.filter(email=user_email).exists()
@@ -50,6 +53,7 @@ def loginview(request):
             login(request,user)
             get_user=User.objects.get(email=user_email)
             user_role=str(get_user.role)
+            # print(type(user_role))
             if user_role == 'Admin' :
                 return redirect('admindashboard')
                 
@@ -91,4 +95,49 @@ def change_password(request):
             return render(request,'account/change_password.html',{'messages':"new password and confirm password are not match"})
 
     return render(request,'account/change_password.html',locals())
+
+
+
+
+list1= []
+def send_mail_to_all(request):
+    if request.method == 'POST':
+        user_email=request.POST.get('email')
+        is_user_exists = User.objects.filter(email=user_email).exists()
+        if is_user_exists:
+            send_mail_func.delay(user_email)
+            user  = User.objects.filter(email = user_email)
+            user_name =user[0]
+            breakpoint()
+            list1.append(user_name)
+            return render(request, 'account/popup.html')
+        
+        else:
+            message= 'This Email is not registered with us,Please provide Correct Email!!'
+            return render(request, 'account/reset_password.html',{'message':message})
+    return render(request,"account/reset_password.html")
+
+            
+def reset_password(request):
+    if request.method == 'POST':
+        password1=request.POST.get('password1')
+        password2=request.POST.get('password2')
+        user_name=list1[0]
+        if password1==password2:
+            user_name.set_password(password1)
+            user_name.save()
+            return redirect('/account')
+        else:
+            message="Password mismatch"
+            return render(request,"account/forgot_password.html",{'message':message})
+    return render(request,"account/forgot_password.html")
+        
+
+
+
+
+    
+           
+            
+            
 
