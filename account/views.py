@@ -92,3 +92,6 @@ def change_password(request):
 
     return render(request,'account/change_password.html',locals())
 
+
+ 
+

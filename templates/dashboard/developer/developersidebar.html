@@ -5,11 +5,15 @@
             <div class="sb-sidenav-menu">
                 <div class="nav">
                     <br>
-                <a class="nav-link" href="{% url 'developerdashboard '%}" style="color: white">
+                {% comment %} <a class="nav-link" href="{% url 'developerdashboard '%}" style="color: white">
+                    <div  class="fa fa-home" aria-hidden="true"><i class="fas fa-table"></i></div>
+                    Home
+                </a> {% endcomment %}
+                <a class="nav-link" href="{% url 'developerdashboard'%}" style="color: white">
                     <div  class="fa fa-home" aria-hidden="true"><i class="fas fa-table"></i></div>
                     Home
                 </a>
-                    <!-- <div class="sb-sidenav-menu-heading">Role <p style="color:white ;"> developer </p></div>
+                    {% comment %} <!-- <div class="sb-sidenav-menu-heading">Role <p style="color:white ;"> developer </p></div>
                     <a class="nav-link" href="#">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Developer
@@ -25,9 +29,9 @@
                     <!-- <a class="nav-link" href="#">
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                         Ratings
-                    </a> -->
-
-                    <a class="nav-link" href="#">
+                    </a> --> {% endcomment %}
+                    
+                    <a class="nav-link" href="{% url 'assignprojects' %}">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         Projects
                     </a>

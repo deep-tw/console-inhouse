@@ -57,7 +57,7 @@ def update_developer(request,id):
                 obj.save()
                 return redirect('/alldevelopers/')
         developers=User.objects.get(id=id)
-        print(developers,'kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk')
+    
         # breakpoint()
         return render(request,'dashboard/manager/update_developer.html',{'developer':developers,'role':role})
 
