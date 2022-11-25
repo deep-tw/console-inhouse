@@ -3,11 +3,38 @@
 
 {% block bodycontent %}
 
-{% for projects in assignprojects %}
 
-    <h1>{{projects}}</h1>
+<h3>All Projects</h3>
+<table id="datatablesSimple">
+    <thead>
+        <tr><th>Project Name</th>
+            <th>Project Description</th>
+            <th>Project Assignee</th>
+            <th>Reporting Manager</th>
+            <th>Bde Manager</th>
+            <th>Status</th>
+            <th>project_start_date</th>
+            <th>project_closing_date</th>
+        
+            
+        </tr>
+    </thead>
+    <tbody>
+        {% for projects in assignproject %}
+        <tr><td>{{projects.project_name}}</td>
+            <td>{{projects.project_description}}</td>
+            <td>{{projects.project_assignee}}</td>
+            <td>{{projects.project_reporting_manager}}</td>
+            <td>{{projects.project_bde_manager}}</td>
+            <td>{{projects.project_status}}</td>
+            <td>{{projects.project_start_date}}</td>
+            <td>{{projects.project_closing_date}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
     
-{% endfor %}
 
 <!-- 
 <div class="row">

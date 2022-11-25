@@ -47,13 +47,9 @@ def update_developers(request,id):
                 obj.designation=designation
                 obj.status=status
                 obj.technologies=technologies
-                print(designation,"$$$$$$$$$$$$")
                 obj.save()
                 return redirect('/alldevelopers/')
         developers=User.objects.get(id=id)
-        # breakpoint()
-        print(developers,"FFFFFFFFFFFFFFFFFFFFffff")
-        print(developers.designation)
         return render(request,'dashboard/admin/update_developer.html',{'developers':developers,'role':role})
 
 # Delete Developer

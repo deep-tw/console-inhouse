@@ -48,11 +48,21 @@ button:hover, a:hover {
         <h1>{{user.username}}</h1>
        <p class="title">role : {{user.role}}</p>
         <p>{{user.designation}}</p>
+        <p>{{user.email}}</p>
         <p>{{user.status}}</p>
         <p>{{user.technologies}}</p>
         <p>{{user.mobile_number}}</p>
+
+        {% if rating_flag %}
+        
+        <p>rating : {{ratings.developer_rating}}</p>
+        {% else %}
+        <p> N/A</p>
+        {% endif %}
+
       </div>
 </center>
+<br><br>
 
 <!-- 
 <div class="row">
