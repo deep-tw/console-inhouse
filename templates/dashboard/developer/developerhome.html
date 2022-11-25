@@ -11,6 +11,7 @@
                     <th>designation</th>
                     <th>Technologies</th>
                     <th>Status</th>
+                    <th>Ratings</th>
                     <th>Update</th>
                 </tr>
             </thead>
@@ -23,6 +24,12 @@
                     <td>{{user.designation}}</td>
                     <td>{{user.technologies}}</td>
                     <td>{{user.status}}</td>
+                    {% if rating_flag %}
+                    <td>{{ratings.developer_rating}} </td>
+                        {% else %}
+                    <td>N/A </td>
+                        {% endif %}
+                   
                     <td><a href="{% url "self_update_developer" id=user.id %}"><button type="button"  class="btn btn-success">Update</button></a></td> 
             </tr>
         </tbody>

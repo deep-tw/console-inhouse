@@ -1,21 +1,29 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
-from account.models import Project,User
+from account.models import Project,ProjectAssign,Rating,User
 # Create your views here.
+
+
 @login_required 
 def developerdashboard(request):
     role= str(request.user.role)
-    assignprojects=Project.objects.filter(project_assignee=request.user)  
-    print(assignprojects)
-    return render (request,'dashboard/developer/developerhome.html',locals())
+    assignprojects=ProjectAssign.objects.filter(project_assignee=request.user).count() 
+    rating_flag=True
+    try:
+        ratings=Rating.objects.get(developer_name=request.user)
+    except:
+        rating_flag=False
+        return render(request,'dashboard/developer/developerhome.html',locals())
+
+    return render(request,'dashboard/developer/developerhome.html',locals())
+
 
 def assignprojects(request):
-    assignproject=Project.objects.filter(project_assignee=request.user)  
-    for projects in assignproject:
-         unassigned=User.objects.all().exclude(username=projects.project_assignee)
-         print(unassigned.__dict__)
+    assignproject=ProjectAssign.objects.filter(project_assignee=request.user) 
+    print(assignproject)
     role= str(request.user.role)
-    return render (request,'dashboard/developer/assignprojects.html',locals())
+
+    return render(request,'dashboard/developer/assignprojects.html',locals())
 
 def self_update_developer(request,id):
         role= str(request.user.role)

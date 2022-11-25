@@ -1,0 +1,29 @@
+{% extends "dashboard/base.html" %}
+
+{% block bodycontent %}
+
+    <h3>All Ratings</h3>
+            <table id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>Developer Name</th>
+                        <th>Developer Rating</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for rating in ratings %}
+                    <tr>
+                        <td>{{rating.developer_name}}</td>
+                        <td>{{rating.developer_rating}}</td>
+                        <td><center><a href="{% url "update" id=rating.id userid=rating.developer_name_id%}"><button type="button" class="btn btn-info">Edit</button></a></center></td>
+                          <td><a href="{% url "delete" id=rating.id %}"><button type="button" class="btn btn-danger">Delete</button></a></center></td>
+                    
+                           </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+{% endblock %}

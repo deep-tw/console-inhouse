@@ -1,3 +1,5 @@
+
+{% load socialaccount %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -6,8 +8,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
+      
+  .fa-google {
+  background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  
+}
+  #bd
+  {
+    margin-left: 20px;
+    color: aqua;
+  }
+  #bd1{
+    margin-left: 20px;
+    color:  #0A66C2;
+  }
         .gradient-custom {
 /* fallback for old browsers */
 background: #6a11cb;
@@ -29,12 +50,12 @@ background: linear-gradient(to right, rgb(247, 245, 248), rgb(248, 248, 250))
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
           <div class="card bg-dark text-white" style="border-radius: 1rem;">
             <div class="card-body p-5 text-center">
-              
-                <form method="post">
-                  {% if messages %}
-                <p style="color: red;">{{ messages }}</p>
-                {% endif %}
+              {% if messages %}
+              <p style="color: red;">{{ messages }}</p>
+              {% endif %}
 
+                <form method="post">
+          
 					  {% csrf_token %}
               <div class="mb-md-5 mt-md-4 pb-5">
                 
@@ -52,13 +73,19 @@ background: linear-gradient(to right, rgb(247, 245, 248), rgb(248, 248, 250))
                   <label class="form-label" for="typePasswordX">Password</label>
                 </div>
   
+                <a href="">
                 <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
-                <!-- <button class="btn btn-primary mb-2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <a href="{% url 'social:begin' 'google-oauth2' %}">Login With Google</a>
-              </button> -->
-                </form>
+                </a>
                 <br><br>
-                <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
+                
+               <!-- <a href="#"></a> <i class="fa fa-twitter fa-2x" id="bd"></i></a>
+                <i class="fa fa-linkedin-square fa-2x" id="bd1"></i> -->
+                  
+                </form>
+                <a  href="{% provider_login_url 'google'%}?next=/">
+                  <i class="fa fa-google fa-2x"></i></a>
+                <br><br>
+                <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="new_password">Forgot password?</a></p>
 
                 <div class="d-flex justify-content-center text-center mt-4 pt-1">
                   <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
@@ -86,7 +113,3 @@ background: linear-gradient(to right, rgb(247, 245, 248), rgb(248, 248, 250))
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
 </html>
-
-
-
-
