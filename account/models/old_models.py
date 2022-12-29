@@ -1,15 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinValueValidator, MaxValueValidator
-from inhouse_console import settings
-
-
-status_choices = (
-('Working' , 'Working'),
-('Available' , 'Available'),
-('Partial Available' , 'Partial Available'),
-('Training' , 'Training'),
-)
 
 
 technologies_known = (
@@ -28,10 +19,8 @@ technologies_known = (
 
 )
 
-project_status = (('Not Started','Not Started'),
-                  ('In Progress','In Progress'),
-                  ('Closed', 'Closed'),
-                  ('Terminated','Terminated'))
+
+
 
 class Role(models.Model):  
     name = models.CharField(max_length=50)
@@ -42,13 +31,23 @@ class Role(models.Model):
     
 
 class User(AbstractUser):
+    WORKING = "Working"
+    AVAILABLE = "Available"
+    PARTIAL_AVAILABLE = "Partial Available"
+    TRAINING = "Training"
+    STATUS_CHOICES = (
+        (WORKING , 'Working'),
+        (AVAILABLE , 'Available'),
+        (PARTIAL_AVAILABLE, 'Partial Available'),
+        (TRAINING , 'Training'),
+    )
     id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     role = models.ForeignKey(Role, null=True, blank=True, on_delete=models.CASCADE)
     mobile_number = models.CharField(max_length = 15, verbose_name = "Mobile No." )
     designation = models.CharField(max_length = 255, verbose_name = "Designation")
     profile_picture = models.ImageField(upload_to="profile_pic",blank=True,null=True)
     certifications = models.FileField(upload_to = "certifications",blank=True,null=True)
-    status = models.CharField(choices = status_choices, default = 'Select Status', max_length = 30 )
+    status = models.CharField(choices = STATUS_CHOICES, default = 'Select Status', max_length = 30 )
     technologies = models.CharField(choices = technologies_known, default = 'Select Technology',  max_length = 35)
     # class Meta:
     #     verbose_name = 'account'
@@ -81,6 +80,16 @@ class Project(BaseModel):
 
 
 class ProjectAssign(BaseModel):
+    NOT_STARTED = "Not Started"
+    IN_PROGRESS = "In Progress"
+    CLOSED = "Closed"
+    TERMINATED = "Terminated"
+    project_status = (
+        (NOT_STARTED,'Not Started'),
+        (IN_PROGRESS,'In Progress'),
+        (CLOSED, 'Closed'),
+        (TERMINATED,'Terminated')
+    )
     project_name=models.ForeignKey(Project,on_delete=models.CASCADE,null=True, related_name='project')
     project_assignee = models.ForeignKey(User, on_delete=models.CASCADE,null=True, related_name='assignee')
     project_reporting_manager = models.CharField( max_length=100, verbose_name='Reporting Manager')
@@ -106,13 +115,6 @@ class Rating(BaseModel):
 class ManagerRating(BaseModel):
     developer_rating=models.IntegerField(default=0,validators=[MinValueValidator(0),MaxValueValidator(10)],verbose_name='developer rating')
     developer_name=models.ForeignKey(User,on_delete=models.CASCADE,verbose_name="developer_name",blank = True)
-    
+
     def __str__(self):
         return str(self.developer_name)
-    
-    
-    
-    
-   
-   
-   

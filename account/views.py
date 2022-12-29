@@ -54,18 +54,19 @@ def loginview(request):
             get_user=User.objects.get(email=user_email)
             user_role=str(get_user.role)
             # print(type(user_role))
-            if user_role == 'Admin' :
-                return redirect('admindashboard')
+            # if user_role == 'Admin' :
+            #     return redirect('admindashboard')
                 
-            elif user_role == 'Manager':
+            # elif user_role == 'Manager':
                 
-                return redirect('managerdashboard')
+            #     return redirect('managerdashboard')
 
-            elif user_role == 'Developer':
+            # elif user_role == 'Developer':
 
-                return redirect('developerdashboard')
-            else:
-                return render(request,'dashboard/userrole.html')
+            #     return redirect('developerdashboard')
+            # else:
+            #     return render(request,'dashboard/userrole.html')
+            return redirect("index")
         else:
             message='You entered invalid credential for Email.,password or you may not registered as a User!!'
             return render(request,'account/login.html',{'messages':message})

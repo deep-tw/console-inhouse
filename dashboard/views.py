@@ -11,25 +11,7 @@ import logging
 logger = logging.getLogger(__name__)
 @login_required 
 def index(request):
-    logger.error("Test!!")
-    t = timezone.now()
-    logging.debug("hello", t)
-    # print(request.user.role, type(request.user.role))
-    user_role= str(request.user.role)
-    print(user_role,"&&&")
-
-    if user_role == 'Admin' :
-        return redirect('admindashboard')
-                
-    elif user_role == 'Manager':
-                
-        return redirect('managerdashboard')
-
-    elif user_role == 'Developer':
-
-        return redirect('developerdashboard')
-    else:
-        return render(request,'dashboard/userrole.html')
+    return render(request, "dashboard.html")
 
     
 

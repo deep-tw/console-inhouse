@@ -9,9 +9,9 @@ from account.rating.views import add_rating,update_rating,delete_rating,retrieve
 
 
 urlpatterns = [
-
+     path('', views.index, name='index'),
     #----------------Admin --------------------------------
-    path('admindashboard/', admindashboard, name='admindashboard'),
+    # path('admindashboard/', admindashboard, name='admindashboard'),
     path('alldevelopers/', alldevelopers, name='alldevelopers'),
     path('update_developers/<int:id>', update_developers, name='update_developers'),
     path('delete_developers/<int:id>', delete_developers, name='delete_developers'),
@@ -21,7 +21,7 @@ urlpatterns = [
 
 
     #----------------Manager --------------------------------
-    path('managerdashboard/', managerdashboard, name='managerdashboard'),
+    # path('managerdashboard/', managerdashboard, name='managerdashboard'),
     path('allprojects/', allprojects, name='allprojects'),
     path('alldevelopers/', alldevelopers, name='alldevelopers'),
     path('update_developer/<int:id>', update_developer, name='update_developer'),
@@ -31,12 +31,11 @@ urlpatterns = [
 
 
     #----------------Developer --------------------------------
-    path('developerdashboard/', developerdashboard, name='developerdashboard'),
+    # path('developerdashboard/', developerdashboard, name='developerdashboard'),
     path('assignprojects/', assignprojects, name='assignprojects'),
 
 
     #-----------------Project --------------------------------------
-    path('', views.index, name='index'),
     path('project/',views.project, name='project_create'),
     path('delete/<int:id>/', views.delete_data, name='delete_project'),
     path('update/<int:id>/', views.update_data, name="update_project"),
