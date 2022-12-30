@@ -1,6 +1,6 @@
 from django.shortcuts import render,HttpResponseRedirect,redirect
 from django.contrib.auth.decorators import login_required
-from account.models import User,Project,ProjectAssign,Rating
+# from account.models import User,Project,ProjectAssign,Rating
 
 
 @login_required 
@@ -35,7 +35,7 @@ def alldevelopers(request):
     # proj= Project.objects.get(project_name="Yurie").prefetch_related('project_assignee')
     # print(proj)
     # proj=Project.objects.filter(project_assignee__designation="Yurie")
-    alldevelopers=User.objects.filter(role=3)
+    alldevelopers=User.objects.filter(role=User.DEVELOPER)
 
     # for dev in alldevelopers:
     #     if Project.objects.filter(project_assignee=dev) and Project.objects.filter(project_reporting_manager=request.user):
@@ -63,7 +63,7 @@ def update_developer(request,id):
                 obj.save()
                 return redirect('/alldevelopers/')
         developers=User.objects.get(id=id)
-        # breakpoint()
+        # breakpoint()  
         print(developers,"FFFFFFFFFFFFFFFFFFFFffff")
         print(developers.designation)
         return render(request,'dashboard/manager/update_developer.html',{'developers':developers,'role':role})

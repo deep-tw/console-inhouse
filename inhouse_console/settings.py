@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    
+    'phonenumber_field',
 ]
 
 
@@ -90,7 +90,7 @@ LOGOUT_REDIRECT_URL = '/'
 # ACCOUNT_USERNAME_REQUIRED = False
 # ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 
-AUTH_USER_MODEL = 'aditya.User'
+AUTH_USER_MODEL = 'account_system.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -264,3 +264,4 @@ EMAIL_HOST_PASSWORD = "aukhbsznhmcfvrxj"
 
 
 
+PHONENUMBER_DEFAULT_REGION = "IN"

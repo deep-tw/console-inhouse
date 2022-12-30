@@ -34,13 +34,10 @@ def registration(request):
 
 #User Login
 def loginview(request):
-    
+
     if request.method == 'POST':
         user_email=request.POST.get('email')
         user_password = request.POST.get('password')
-      
-  
-       
         print(user_email,user_password)
         # users= User.objects.filter(email=user_email).exists()
         # if not users:
@@ -106,7 +103,8 @@ def send_mail_to_all(request):
         user_email=request.POST.get('email')
         is_user_exists = User.objects.filter(email=user_email).exists()
         if is_user_exists:
-            send_mail_func.delay(user_email)
+            # TODO
+            # send_mail_func.delay(user_email)
             user  = User.objects.filter(email = user_email)
             user_name =user[0]
             breakpoint()
@@ -132,13 +130,3 @@ def reset_password(request):
             message="Password mismatch"
             return render(request,"account/forgot_password.html",{'message':message})
     return render(request,"account/forgot_password.html")
-        
-
-
-
-
-    
-           
-            
-            
-

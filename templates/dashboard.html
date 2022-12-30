@@ -3,16 +3,15 @@
 {% block bodycontent  %}
 {% load static %}
 
-
-{% if user.role.name == 'Admin' %}
+{% if user.role == 'admin' %}
 
 {% include "dashboard/admin/dashboard.html" %}
 
-{% elif user.role.name == 'Manager' %}
+{% elif user.role == 'manager' %}
 
 {% include "dashboard/manager/dashboard.html" %}
 
-{% elif user.role.name == 'Developer' %}
+{% elif user.role == 'developer' %}
 {% include "dashboard/developer/dashboard.html" %}
 
 {% endif %}
