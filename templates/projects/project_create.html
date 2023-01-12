@@ -1,4 +1,4 @@
-{% extends "dashboard/base.html" %}
+{% extends "index.html" %}
 
 
 {% block bodycontent %}
@@ -99,7 +99,7 @@
       
     } </style>
 <div class="signup-form">
-    <form action="{% url 'project_create' %}" method="post">
+    <form action="{% url 'index' %}" method="post">
       {% csrf_token %}
 		<h2>Add Project</h2>
 		<p class="hint-text">Add you project</p>

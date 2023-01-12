@@ -1,0 +1,13 @@
+{% if user.role == 'admin' %}
+
+{% include "dashboard/admin/sidebar.html" %}
+
+{% elif user.role == 'manager' %}
+
+{% include "dashboard/manager/sidebar.html" %}
+
+{% elif user.role == 'developer' %}
+
+{% include "dashboard/developer/sidebar.html" %}
+
+{% endif %}

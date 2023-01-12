@@ -34,13 +34,10 @@ def registration(request):
 
 #User Login
 def loginview(request):
-    
+
     if request.method == 'POST':
         user_email=request.POST.get('email')
         user_password = request.POST.get('password')
-      
-  
-       
         print(user_email,user_password)
         # users= User.objects.filter(email=user_email).exists()
         # if not users:
@@ -54,18 +51,19 @@ def loginview(request):
             get_user=User.objects.get(email=user_email)
             user_role=str(get_user.role)
             # print(type(user_role))
-            if user_role == 'Admin' :
-                return redirect('admindashboard')
+            # if user_role == 'Admin' :
+            #     return redirect('admindashboard')
                 
-            elif user_role == 'Manager':
+            # elif user_role == 'Manager':
                 
-                return redirect('managerdashboard')
+            #     return redirect('managerdashboard')
 
-            elif user_role == 'Developer':
+            # elif user_role == 'Developer':
 
-                return redirect('developerdashboard')
-            else:
-                return render(request,'dashboard/userrole.html')
+            #     return redirect('developerdashboard')
+            # else:
+            #     return render(request,'dashboard/userrole.html')
+            return redirect("index")
         else:
             message='You entered invalid credential for Email.,password or you may not registered as a User!!'
             return render(request,'account/login.html',{'messages':message})
@@ -105,7 +103,8 @@ def send_mail_to_all(request):
         user_email=request.POST.get('email')
         is_user_exists = User.objects.filter(email=user_email).exists()
         if is_user_exists:
-            send_mail_func.delay(user_email)
+            # TODO
+            # send_mail_func.delay(user_email)
             user  = User.objects.filter(email = user_email)
             user_name =user[0]
             breakpoint()
@@ -131,13 +130,3 @@ def reset_password(request):
             message="Password mismatch"
             return render(request,"account/forgot_password.html",{'message':message})
     return render(request,"account/forgot_password.html")
-        
-
-
-
-
-    
-           
-            
-            
-

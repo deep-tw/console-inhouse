@@ -1,10 +1,11 @@
 from django.contrib import admin
-from .models import Role,User,Project,Rating,ManagerModel,ProjectAssign
-# Register your models here.
+from . import models
 
-admin.site.register(Role)
-admin.site.register(User)
-admin.site.register(Project)
-admin.site.register(Rating)    
-admin.site.register(ProjectAssign)
-admin.site.register(ManagerModel)
+admin.site.register(models.User)
+admin.site.register(models.Developer)
+admin.site.register(models.Manager)
+admin.site.register(models.Designation)
+admin.site.register(models.Certification)
+admin.site.register(models.Technology)
+# admin.site.register(models.Skill)
+admin.site.register(models.Project)
